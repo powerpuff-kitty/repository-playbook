@@ -1,0 +1,22 @@
+name: Incorrect audit finding
+description: Report a false positive, false negative or misleading evidence state.
+body:
+  - type: input
+    id: rule
+    attributes:
+      label: Rule ID, profile and tool version
+    validations:
+      required: true
+  - type: textarea
+    id: fixture
+    attributes:
+      label: Minimal sanitised fixture and command
+      description: Do not include private code, tokens or vulnerability details.
+    validations:
+      required: true
+  - type: textarea
+    id: comparison
+    attributes:
+      label: Observed result and expected result
+    validations:
+      required: true

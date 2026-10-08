@@ -1,0 +1,7 @@
+{
+  "id": "library",
+  "version": 1,
+  "description": "Reusable code consumed by other projects. Adds installation, API and versioning review.",
+  "maturity": "baseline",
+  "notes": "Baseline only; team size, visibility and lifecycle exceptions require recorded human judgement. No weighted quality score."
+}

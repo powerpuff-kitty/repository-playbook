@@ -1,0 +1,21 @@
+name: Rule or guide proposal
+description: Propose evidence-backed, profile-aware repository guidance.
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem, audience and applicability
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Primary references and counterexamples
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification approach and false-positive risks
+    validations:
+      required: true

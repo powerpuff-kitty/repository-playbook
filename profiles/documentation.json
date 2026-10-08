@@ -1,0 +1,7 @@
+{
+  "id": "documentation",
+  "version": 1,
+  "description": "Guides and reference material. Does not assume a deployed service or distributable package.",
+  "maturity": "baseline",
+  "notes": "Baseline only; team size, visibility and lifecycle exceptions require recorded human judgement. No weighted quality score."
+}

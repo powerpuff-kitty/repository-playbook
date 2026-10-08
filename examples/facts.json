@@ -1,0 +1,21 @@
+{
+  "repository": "example/project",
+  "revision": null,
+  "observed_at": "2026-10-08T13:00:00Z",
+  "facts": [
+    {
+      "key": "description_present",
+      "status": "observed",
+      "value": true,
+      "source": "https://api.github.com/repos/example/project",
+      "reason": "Illustrative fixture, not an observation of a real repository."
+    },
+    {
+      "key": "required_checks_enforced",
+      "status": "unknown",
+      "value": false,
+      "source": "https://api.github.com/repos/example/project/rulesets",
+      "reason": "Access unavailable. False is a schema placeholder ignored for unknown status."
+    }
+  ]
+}

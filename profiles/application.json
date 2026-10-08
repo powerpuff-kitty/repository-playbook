@@ -1,0 +1,7 @@
+{
+  "id": "application",
+  "version": 1,
+  "description": "Runnable applications. Adds environment, deployment and operational review.",
+  "maturity": "baseline",
+  "notes": "Baseline only; team size, visibility and lifecycle exceptions require recorded human judgement. No weighted quality score."
+}

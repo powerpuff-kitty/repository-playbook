@@ -1,0 +1,7 @@
+{
+  "id": "catalogue",
+  "version": 1,
+  "description": "Structured data and curated resources. Adds provenance, licensing boundaries and regeneration review.",
+  "maturity": "baseline",
+  "notes": "Baseline only; team size, visibility and lifecycle exceptions require recorded human judgement. No weighted quality score."
+}
