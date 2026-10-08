@@ -11,3 +11,6 @@ The local scanner must remain offline and read-only: never execute target script
 Add regression tests for new checks and false positives. Do not silently widen the Markdown parser's claimed scope. Keep generation deterministic and ensure malformed contracts fail closed.
 
 Publishing, paid services, new dependencies, changing repository settings, bulk cross-repository changes and automatic remediation require separate explicit authorisation. Report what was actually tested and any remaining limitations.
+
+
+The v0.3 static workflow and Dependabot checks use a deliberately limited YAML/manifest reader. Unsupported syntax, partial observations, inaccessible GitHub settings and ambiguous updater configurations must never be counted as passes. SHA matching of selected files makes requests for remote paths/ref only; it does not verify the whole repository or execute Git.

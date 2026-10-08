@@ -16,13 +16,13 @@ Reports include rule versions, priority, basis, evidence, remediation, observati
 
 `--facts FILE` loads the contract in `schemas/facts.schema.json`. Use `examples/facts.json` only as a fictional format example. Each boolean fact has a key, observed/unknown status, source URL and optional reason. Record the repository, observation time and optional source revision. Supported keys include `description_present`, `topics_present`, `required_checks_enforced` and `community.CONTRIBUTING.md`, `community.SECURITY.md`, `community.CODE_OF_CONDUCT.md`.
 
-A community observation must cover effective defaults, not just local files. A required-check observation must consider branch protections, effective rulesets, applicable check contexts and bypasses. Unknown observations ignore the placeholder boolean. Snapshots expire after 30 days and future dates beyond a small clock tolerance are rejected as usable evidence. The explicit repository identity must match the snapshot when both are supplied. Neither supplied identity nor remote GitHub revision is independently matched to the checkout in v0.2. Use `--github OWNER/REPO` instead of `--facts` to collect current GitHub.com settings through bounded GET requests. These flags cannot be combined. GitHub facts and caller-provided facts are labelled differently in the report source and finding evidence.
+A community observation must cover effective defaults, not just local files. A required-check observation must consider branch protections, effective rulesets, applicable check contexts and bypasses. Unknown observations ignore the placeholder boolean. Snapshots expire after 30 days and future dates beyond a small clock tolerance are rejected as usable evidence. The explicit repository identity must match the snapshot when both are supplied. Supplied identity and the remote revision are never assumed to match the checkout. In v0.3, `--compare-remote` explicitly compares selected documentation/configuration file blobs and records mismatches without claiming a full checkout match. Use `--github OWNER/REPO` instead of `--facts` to collect current GitHub.com settings through bounded GET requests. These flags cannot be combined. GitHub facts and caller-provided facts are labelled differently in the report source and finding evidence.
 
 ## Bounds and limitations
 
 The scan excludes `.git`, `node_modules`, `.venv`, `vendor`, `dist` and `coverage`; skips symbolic links and special files; limits traversal to 10,000 entries and depth 24; reads at most 512 KiB per text file and 16 MiB total. It does not read `.env` files. Expected files missing from an incomplete scan do not silently fail. Paths and titles can still be sensitive: review reports before sharing.
 
-Use a stable copy of untrusted content. Realpath checks and no-follow file opens reduce accidental escapes but do not provide a sandbox against concurrent filesystem mutation. The simple Markdown detector is not a CommonMark implementation; see [automation](automation.md). No live external-link, licence-text interpretation, workflow AST, security scan, package execution or Git-history analysis is performed. The optional GitHub adapter fetches metadata and selected settings, not source files or workflow contents.
+Use a stable copy of untrusted content. Realpath checks and no-follow file opens reduce accidental escapes but do not provide a sandbox against concurrent filesystem mutation. The simple Markdown detector is not a CommonMark implementation; see [automation](automation.md). No live external-link, licence-text interpretation, general workflow AST, complete security scan, package execution or Git-history analysis is performed. Two v0.3 static subset detectors check pinned Action refs and `write-all` grants plus selected dependency manifests against Dependabot directories. The optional API adapter fetches settings, and with explicit `--compare-remote` opt-in it requests up to ten high-signal file *metadata* entries at the remote commit. It sends only repository paths and ref; no local content or hashes. This sample does not prove the whole checkout, untracked content, repository Git state, code execution or deployment matches.
 
 ## Examples
 
@@ -31,6 +31,9 @@ node src/cli.mjs ../project --profile application --format markdown
 node src/cli.mjs ../project --profile catalogue --facts ../facts.json --format json
 node src/cli.mjs ../project --profile documentation --fail-on medium
 node src/cli.mjs ../project --profile library --github owner/repo
+node src/cli.mjs ../project --profile library --github owner/repo --compare-remote --format json
+node src/cli.mjs ../project --profile library --github owner/repo
+node src/cli.mjs ../project --profile library --github owner/repo --compare-remote --format json --compare-remote --format json
 node src/github-cli.mjs owner/repo > ../github-observations.json
 ```
 

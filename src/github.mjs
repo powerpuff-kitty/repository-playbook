@@ -221,3 +221,52 @@ export async function collectGitHubFacts(name, { fetchImpl, token = '', now = ne
   ];
   return { repository: meta.data.full_name, revision, observed_at: now.toISOString(), facts };
 }
+
+/** Compare a bounded documentation/configuration *sample*, never the full Git checkout.
+ * No local file bytes or hashes are sent to GitHub; the request transmits only paths/ref.
+ * localScan.blobShas holds hashes of exact bytes read, not decoded/normalised text.
+ */
+export async function compareGitHubFiles(name, revision, localScan, {
+  fetchImpl, token = '', timeoutMs = 8000, maxFiles = 10,
+} = {}) {
+  repositoryName(name);
+  if (!/^[0-9a-f]{40}$/i.test(revision ?? '')) return {
+    status: 'unknown', revision: null, scope: 'selected documentation/configuration files',
+    note: 'No verified remote default-branch commit SHA was available.', files: [],
+  };
+  if (!Number.isInteger(maxFiles) || maxFiles < 1 || maxFiles > 12) throw new Error('Remote comparison file limit must be between 1 and 12');
+  const [owner, repo] = name.split('/');
+  const base = `/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}`;
+  const api = new GitHubReader({ fetchImpl, token, timeoutMs, maxRequests: maxFiles });
+  const priority = name => name === 'README.md' ? 0 : name === 'AGENTS.md' ? 1 : name === '.github/dependabot.yml' ? 2 :
+    name === '.github/dependabot.yaml' ? 2 : /^\.github\/workflows\/[^/]+\.ya?ml$/.test(name) ? 3 :
+    name === 'package.json' ? 4 : name === 'LICENSE' ? 5 : name === 'CONTRIBUTING.md' ? 6 :
+    name === 'SECURITY.md' ? 7 : name === 'CODE_OF_CONDUCT.md' ? 8 : 20;
+  const eligible = [...(localScan.blobShas?.keys() ?? [])].filter(p => priority(p) !== 20).sort((a,b) => priority(a) - priority(b) || a.localeCompare(b, 'en'));
+  const sample = eligible.slice(0, maxFiles);
+  const files = [];
+  for (const file of sample) {
+    // Input paths originate in the bounded local scanner; defend the API anyway.
+    if (file.startsWith('/') || file.split('/').some(s => !s || s === '.' || s === '..')) throw new Error('Invalid local comparison path');
+    const endpoint = `${base}/contents/${file.split('/').map(encodeURIComponent).join('/')}?ref=${revision}`;
+    const remote = await api.get(endpoint);
+    if (!remote.ok) {
+      files.push({ path: file, status: 'unknown', reason: reason(remote) });
+      continue;
+    }
+    if (remote.data?.type !== 'file' || !/^[0-9a-f]{40}$/i.test(remote.data?.sha ?? '')) {
+      files.push({ path: file, status: 'unknown', reason: 'GitHub response did not include a valid file blob SHA.' });
+      continue;
+    }
+    const matches = remote.data.sha.toLowerCase() === localScan.blobShas.get(file)?.toLowerCase();
+    files.push({ path: file, status: matches ? 'match' : 'mismatch', reason: matches ? 'Local file bytes match the remote Git blob SHA.' : 'Local file bytes differ from the remote Git blob SHA.' });
+  }
+  const mismatched = files.some(f => f.status === 'mismatch');
+  const incomplete = eligible.length > sample.length || files.some(f => f.status === 'unknown');
+  return {
+    status: mismatched ? 'mismatch' : !files.length || files.every(f => f.status === 'unknown') ? 'unknown' : incomplete ? 'partial' : 'matching-sample',
+    revision, scope: 'selected documentation/configuration files only; not a full tracked tree or dirty-state check',
+    note: eligible.length > maxFiles ? `Selected first ${maxFiles} of ${eligible.length} eligible readable files; full checkout match is not proven.` : 'Only selected, readable text files were compared; full checkout match is not proven.',
+    files,
+  };
+}

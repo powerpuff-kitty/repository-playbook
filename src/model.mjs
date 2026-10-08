@@ -4,7 +4,7 @@ import path from 'node:path';
 
 export const HOME = fileURLToPath(new URL('../', import.meta.url));
 export const STATES = ['pass', 'fail', 'not-applicable', 'unknown', 'manual-review'];
-export const CHECKS = ['file', 'community', 'workflow', 'readme-sections', 'local-links', 'badge-scope', 'manual', 'setting'];
+export const CHECKS = ['file', 'community', 'workflow', 'readme-sections', 'local-links', 'badge-scope', 'manual', 'setting', 'workflow-security', 'dependency-coverage'];
 export const readJson = async file => JSON.parse(await readFile(file, 'utf8'));
 
 // Deliberately small, explicit JSON Schema subset. Unknown keywords fail closed.

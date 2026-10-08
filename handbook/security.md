@@ -6,7 +6,7 @@ Trace untrusted pull-request content and downloaded artifacts before any privile
 
 Inspect effective branch protection and rulesets, required check contexts, target branches and bypass actors. A checked-in settings proposal does not enable those settings. A source-control scan cannot determine whether secret scanning or private reporting is enabled.
 
-The v0.1 auditor uses local files and optional caller-supplied observations only. Missing, expired or inaccessible settings remain unknown. A snapshot marked observed is still supplied evidence, not a live independently verified result. Report it with its date and source.
+Since v0.2, the auditor can opt into bounded live GitHub.com facts; since v0.3, `SEC-001` can detect clear mutable external `uses` references and explicit `write-all` grants from simple YAML. Unsupported YAML, dynamic Actions, Docker tags, missing explicit token permissions and `pull_request_target` need manual review. This is **not** a general security scanner or a workflow parser. Missing, expired or inaccessible settings remain unknown; caller-supplied facts are not independently verified. Record the observation time and source.
 
 Publish a private reporting route only after verifying it. Until then, request a private contact without exposing vulnerability details. This repository's reporting route needs maintainer confirmation before a broad public release; no response-time guarantee or security certification is claimed.
 

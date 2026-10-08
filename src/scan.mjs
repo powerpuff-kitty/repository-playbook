@@ -1,5 +1,6 @@
 import { readdir, open, realpath } from 'node:fs/promises';
 import { constants } from 'node:fs';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 
 const OMIT = new Set(['.git', 'node_modules', '.venv', 'vendor', 'dist', 'coverage']);
@@ -11,6 +12,7 @@ const TEXT = /\.(?:md|json|ya?ml|toml|cff|txt)$/i;
 export async function snapshot(directory) {
   const root = await realpath(directory);
   const files = new Map();
+  const blobShas = new Map();
   const skipped = [];
   let count = 0;
   let total = 0;
@@ -45,14 +47,16 @@ export async function snapshot(directory) {
         }
         if (bytesRead > stat.size) throw new Error('changed-during-read');
         total += bytesRead;
-        files.set(relative, buffer.subarray(0, bytesRead).toString('utf8'));
+        const raw = buffer.subarray(0, bytesRead);
+        blobShas.set(relative, createHash('sha1').update(`blob ${bytesRead}\0`).update(raw).digest('hex'));
+        files.set(relative, raw.toString('utf8'));
       } catch (error) { skipped.push({ path: relative, reason: ['size-limit','unsafe-path','special-file','changed-during-read'].includes(error.message) ? error.message : 'unreadable' }); }
       finally { await handle?.close(); }
     }
   }
   await walk(root);
   if (bounded) skipped.push({ path: '.', reason: 'entry-limit' });
-  return { files, skipped, bytesRead: total };
+  return { files, blobShas, skipped, bytesRead: total };
 }
 
 export function stripCode(text) {

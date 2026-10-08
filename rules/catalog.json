@@ -1,38 +1,818 @@
 [
-{"id":"DISC-001","version":1,"title":"Explain the repository in its About description","category":"discoverability","priority":"medium","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"setting","guide":"handbook/discoverability.md","review":"Write a specific description naming the audience and output.","remediation":"Write a specific description naming the audience and output.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08","fact":"description_present"},
-{"id":"DISC-002","version":1,"title":"Use relevant repository topics","category":"discoverability","priority":"low","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"setting","guide":"handbook/discoverability.md","review":"Select accurate topics that match the implemented scope; do not keyword-stuff.","remediation":"Select accurate topics that match the implemented scope; do not keyword-stuff.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08","fact":"topics_present"},
-{"id":"DOC-001","version":1,"title":"Provide a nonempty README","category":"documentation","priority":"high","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"file","guide":"handbook/readme.md","review":"Add a Markdown README explaining the project and its first-use path.","remediation":"Add a Markdown README explaining the project and its first-use path.","references":["https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"],"last_reviewed":"2026-10-08","paths":["README.md",".github/README.md","docs/README.md","readme.md"]},
-{"id":"DOC-002","version":1,"title":"State purpose, audience and boundaries","category":"documentation","priority":"high","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/readme.md","review":"Ask an unfamiliar reader to identify what this does, for whom, and what it does not do.","remediation":"Ask an unfamiliar reader to identify what this does, for whom, and what it does not do.","references":["https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"],"last_reviewed":"2026-10-08"},
-{"id":"DOC-003","version":1,"title":"Provide a complete first-use sequence","category":"onboarding","priority":"high","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"readme-sections","guide":"handbook/readme.md","review":"Check prerequisites, clone or installation, working directory, commands and expected output. Alternate heading names are acceptable.","remediation":"Check prerequisites, clone or installation, working directory, commands and expected output. Alternate heading names are acceptable.","references":["https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"],"last_reviewed":"2026-10-08"},
-{"id":"DOC-004","version":1,"title":"Keep supported local Markdown targets resolvable","category":"documentation","priority":"medium","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"local-links","guide":"handbook/automation.md","review":"Repair missing local files and references; manually verify deferred anchors and complex Markdown syntax.","remediation":"Repair missing local files and references; manually verify deferred anchors and complex Markdown syntax.","references":["https://docs.github.com/en/actions/reference/security/secure-use"],"last_reviewed":"2026-10-08"},
-{"id":"DOC-005","version":1,"title":"Use purposeful and accessible badges","category":"presentation","priority":"low","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/badges.md","review":"Explain each badge claim, use meaningful alt text and a useful click target, and remove redundant decoration.","remediation":"Explain each badge claim, use meaningful alt text and a useful click target, and remove redundant decoration.","references":["https://shields.io/badges/git-hub-actions-workflow-status"],"last_reviewed":"2026-10-08"},
-{"id":"DOC-006","version":1,"title":"Scope workflow badges to branch and event","category":"presentation","priority":"low","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"badge-scope","guide":"handbook/badges.md","review":"Set explicit branch and event parameters on recognised CI badge URLs. This is a playbook preference, not a platform requirement.","remediation":"Set explicit branch and event parameters on recognised CI badge URLs. This is a playbook preference, not a platform requirement.","references":["https://shields.io/badges/git-hub-actions-workflow-status"],"last_reviewed":"2026-10-08"},
-{"id":"DOC-007","version":1,"title":"Disclose limitations and evidence","category":"documentation","priority":"high","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/documentation.md","review":"Separate implemented, tested, measured, inferred and unknown claims. Include environments for measurements.","remediation":"Separate implemented, tested, measured, inferred and unknown claims. Include environments for measurements.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08"},
-{"id":"DOC-008","version":1,"title":"Provide useful documentation navigation","category":"documentation","priority":"medium","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/documentation.md","review":"Keep the README as an entry point; link guides, reference, architecture and troubleshooting without duplicating authority.","remediation":"Keep the README as an entry point; link guides, reference, architecture and troubleshooting without duplicating authority.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08"},
-{"id":"STRUCT-001","version":1,"title":"Explain the actual repository layout","category":"structure","priority":"medium","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/structure.md","review":"Map source inputs, runtime code, tests, examples and generated outputs. Do not reorganise only to match a fashionable template.","remediation":"Map source inputs, runtime code, tests, examples and generated outputs. Do not reorganise only to match a fashionable template.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08"},
-{"id":"STRUCT-002","version":1,"title":"Identify authoritative and generated files","category":"structure","priority":"medium","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/structure.md","review":"Document source ownership and regeneration commands; prevent manual edits to derived content.","remediation":"Document source ownership and regeneration commands; prevent manual edits to derived content.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08"},
-{"id":"STRUCT-003","version":1,"title":"Document editor whitespace conventions","category":"structure","priority":"low","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"file","guide":"handbook/structure.md","review":"Add a project-appropriate .editorconfig rather than relying on personal editor settings.","remediation":"Add a project-appropriate .editorconfig rather than relying on personal editor settings.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08","paths":[".editorconfig"]},
-{"id":"COMM-001","version":1,"title":"Provide contribution instructions","category":"community","priority":"medium","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"community","guide":"handbook/contribution.md","review":"Document setup, validation and review expectations. Check inherited defaults before declaring a local absence a failure.","remediation":"Document setup, validation and review expectations. Check inherited defaults before declaring a local absence a failure.","references":["https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file"],"last_reviewed":"2026-10-08","paths":["CONTRIBUTING.md",".github/CONTRIBUTING.md","docs/CONTRIBUTING.md"]},
-{"id":"COMM-002","version":1,"title":"Provide a private security reporting route","category":"security","priority":"high","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"community","guide":"handbook/security.md","review":"Document a verified private reporting channel and supported versions; do not publish vulnerability details in public issues.","remediation":"Document a verified private reporting channel and supported versions; do not publish vulnerability details in public issues.","references":["https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file"],"last_reviewed":"2026-10-08","paths":["SECURITY.md",".github/SECURITY.md","docs/SECURITY.md"]},
-{"id":"COMM-003","version":1,"title":"State contributor behaviour and enforcement","category":"community","priority":"medium","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"community","guide":"handbook/contribution.md","review":"Provide a conduct policy with a real escalation route; presence alone does not establish enforceability.","remediation":"Provide a conduct policy with a real escalation route; presence alone does not establish enforceability.","references":["https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file"],"last_reviewed":"2026-10-08","paths":["CODE_OF_CONDUCT.md",".github/CODE_OF_CONDUCT.md","docs/CODE_OF_CONDUCT.md"]},
-{"id":"COMM-004","version":1,"title":"Make change review expectations discoverable","category":"community","priority":"low","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"file","guide":"handbook/contribution.md","review":"Add a lightweight PR template with purpose, verification and risk prompts.","remediation":"Add a lightweight PR template with purpose, verification and risk prompts.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08","paths":[".github/PULL_REQUEST_TEMPLATE.md","PULL_REQUEST_TEMPLATE.md","docs/PULL_REQUEST_TEMPLATE.md"]},
-{"id":"COMM-005","version":1,"title":"Make ownership and triage workable","category":"community","priority":"medium","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/contribution.md","review":"Explain who reviews which areas and how issues are triaged; a solo project need not pretend to have a committee.","remediation":"Explain who reviews which areas and how issues are triaged; a solo project need not pretend to have a committee.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08"},
-{"id":"QUAL-001","version":1,"title":"Provide discoverable CI workflow configuration","category":"automation","priority":"medium","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"workflow","guide":"handbook/automation.md","review":"Add appropriate automated checks. File presence is not evidence of passing runs or enforced checks.","remediation":"Add appropriate automated checks. File presence is not evidence of passing runs or enforced checks.","references":["https://docs.github.com/en/actions/reference/security/secure-use"],"last_reviewed":"2026-10-08"},
-{"id":"QUAL-002","version":1,"title":"Test the documented behaviours","category":"quality","priority":"high","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/automation.md","review":"Review test assertions and run evidence, including examples, edge cases and failure paths; do not infer test quality from a script name.","remediation":"Review test assertions and run evidence, including examples, edge cases and failure paths; do not infer test quality from a script name.","references":["https://docs.github.com/en/actions/reference/security/secure-use"],"last_reviewed":"2026-10-08"},
-{"id":"QUAL-003","version":1,"title":"Check generated-output freshness","category":"quality","priority":"medium","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/automation.md","review":"Regenerate deterministically and compare without writing in PR checks. Route intentional changes through normal review.","remediation":"Regenerate deterministically and compare without writing in PR checks. Route intentional changes through normal review.","references":["https://docs.github.com/en/actions/reference/security/secure-use"],"last_reviewed":"2026-10-08"},
-{"id":"QUAL-004","version":1,"title":"Cover all dependency manifests","category":"quality","priority":"high","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/automation.md","review":"Enumerate every package directory and ecosystem, then compare updater coverage and supported runtime constraints.","remediation":"Enumerate every package directory and ecosystem, then compare updater coverage and supported runtime constraints.","references":["https://docs.github.com/en/actions/reference/security/secure-use"],"last_reviewed":"2026-10-08"},
-{"id":"SEC-001","version":1,"title":"Review Action references and permissions","category":"security","priority":"high","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/security.md","review":"Use verified full commit references, read-only defaults and narrowly scoped privileged jobs. Review workflow syntax with dedicated tooling.","remediation":"Use verified full commit references, read-only defaults and narrowly scoped privileged jobs. Review workflow syntax with dedicated tooling.","references":["https://docs.github.com/en/actions/reference/security/secure-use"],"last_reviewed":"2026-10-08"},
-{"id":"SEC-002","version":1,"title":"Require relevant checks before merging","category":"security","priority":"high","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"setting","guide":"handbook/security.md","review":"Inspect effective branch protection and rulesets, required contexts and bypasses. Files in the repository do not enforce settings.","remediation":"Inspect effective branch protection and rulesets, required contexts and bypasses. Files in the repository do not enforce settings.","references":["https://docs.github.com/en/actions/reference/security/secure-use"],"last_reviewed":"2026-10-08","fact":"required_checks_enforced"},
-{"id":"SEC-003","version":1,"title":"Keep untrusted execution out of privileged contexts","category":"security","priority":"high","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/security.md","review":"Trace pull-request code, artifacts and interpolation through privileged jobs. Never grant a documentation checker broad write access.","remediation":"Trace pull-request code, artifacts and interpolation through privileged jobs. Never grant a documentation checker broad write access.","references":["https://docs.github.com/en/actions/reference/security/secure-use"],"last_reviewed":"2026-10-08"},
-{"id":"REL-001","version":1,"title":"Provide explicit licence text","category":"releases","priority":"high","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"file","guide":"handbook/releases.md","review":"Include the selected licence text and explain any code/data/upstream boundaries. Detection is not legal approval.","remediation":"Include the selected licence text and explain any code/data/upstream boundaries. Detection is not legal approval.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08","paths":["LICENSE","LICENSE.md","COPYING","LICENSE.txt"]},
-{"id":"REL-002","version":1,"title":"Keep version and release policy consistent","category":"releases","priority":"high","basis":"editorial-policy","profiles":["library","application"],"check":"manual","guide":"handbook/releases.md","review":"Choose independent or synchronised package versions; align manifests, tags, runbooks and changelogs with that policy.","remediation":"Choose independent or synchronised package versions; align manifests, tags, runbooks and changelogs with that policy.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08"},
-{"id":"REL-003","version":1,"title":"Verify the distributed installation path","category":"releases","priority":"high","basis":"editorial-policy","profiles":["library"],"check":"manual","guide":"handbook/releases.md","review":"Test the built package in a fresh consumer directory, not just imports from the source tree.","remediation":"Test the built package in a fresh consumer directory, not just imports from the source tree.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08"},
-{"id":"PERF-001","version":1,"title":"Control repository and history growth","category":"performance","priority":"medium","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/performance.md","review":"Measure large objects and history separately from working-tree size. Do not rewrite shared history as an automatic fix.","remediation":"Measure large objects and history separately from working-tree size. Do not rewrite shared history as an automatic fix.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08"},
-{"id":"PERF-002","version":1,"title":"Keep CI cost proportional to risk","category":"performance","priority":"low","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/performance.md","review":"Inspect duration, cache trust, redundant jobs, cancellation and retention; optimise measured bottlenecks rather than adding unsafe caching.","remediation":"Inspect duration, cache trust, redundant jobs, cancellation and retention; optimise measured bottlenecks rather than adding unsafe caching.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08"},
-{"id":"AGENT-001","version":1,"title":"Provide project-specific agent instructions","category":"agent-readiness","priority":"low","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"file","guide":"handbook/agent-readiness.md","review":"Add concise AGENTS.md instructions for commands, boundaries, generated paths and evidence requirements.","remediation":"Add concise AGENTS.md instructions for commands, boundaries, generated paths and evidence requirements.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08","paths":["AGENTS.md"]},
-{"id":"LIFE-001","version":1,"title":"Communicate maintenance status and handover","category":"lifecycle","priority":"medium","basis":"editorial-policy","profiles":["documentation","catalogue","library","application"],"check":"manual","guide":"handbook/lifecycle.md","review":"State experimental, active, maintenance or archived status and migration paths. Infrequent commits alone do not indicate abandonment.","remediation":"State experimental, active, maintenance or archived status and migration paths. Infrequent commits alone do not indicate abandonment.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08"},
-{"id":"CAT-001","version":1,"title":"Record catalogue provenance and unknowns","category":"catalogue","priority":"high","basis":"editorial-policy","profiles":["catalogue"],"check":"manual","guide":"handbook/catalogues.md","review":"Store primary sources, reviewed dates, schema constraints and explicit unknowns. Do not promote sourced claims to reproduced measurements.","remediation":"Store primary sources, reviewed dates, schema constraints and explicit unknowns. Do not promote sourced claims to reproduced measurements.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08"},
-{"id":"CAT-002","version":1,"title":"Separate catalogue code, data and upstream rights","category":"catalogue","priority":"high","basis":"editorial-policy","profiles":["catalogue"],"check":"manual","guide":"handbook/catalogues.md","review":"Explain what licence covers each material and preserve upstream ownership. A catalogue listing is not a grant of model rights.","remediation":"Explain what licence covers each material and preserve upstream ownership. A catalogue listing is not a grant of model rights.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08"},
-{"id":"APP-001","version":1,"title":"Document environment and deployment boundaries","category":"application","priority":"high","basis":"editorial-policy","profiles":["application"],"check":"manual","guide":"handbook/applications.md","review":"Provide safe example configuration, deployment and rollback steps, and clearly separate client-visible from secret values.","remediation":"Provide safe example configuration, deployment and rollback steps, and clearly separate client-visible from secret values.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08"},
-{"id":"APP-002","version":1,"title":"Document operation and recovery","category":"application","priority":"high","basis":"editorial-policy","profiles":["application"],"check":"manual","guide":"handbook/applications.md","review":"Explain monitoring, data backups, recovery checks and failure behaviour appropriate to the actual application.","remediation":"Explain monitoring, data backups, recovery checks and failure behaviour appropriate to the actual application.","references":["https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"],"last_reviewed":"2026-10-08"}
+  {
+    "id": "DISC-001",
+    "version": 1,
+    "title": "Explain the repository in its About description",
+    "category": "discoverability",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "setting",
+    "guide": "handbook/discoverability.md",
+    "review": "Write a specific description naming the audience and output.",
+    "remediation": "Write a specific description naming the audience and output.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08",
+    "fact": "description_present"
+  },
+  {
+    "id": "DISC-002",
+    "version": 1,
+    "title": "Use relevant repository topics",
+    "category": "discoverability",
+    "priority": "low",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "setting",
+    "guide": "handbook/discoverability.md",
+    "review": "Select accurate topics that match the implemented scope; do not keyword-stuff.",
+    "remediation": "Select accurate topics that match the implemented scope; do not keyword-stuff.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08",
+    "fact": "topics_present"
+  },
+  {
+    "id": "DOC-001",
+    "version": 1,
+    "title": "Provide a nonempty README",
+    "category": "documentation",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "file",
+    "guide": "handbook/readme.md",
+    "review": "Add a Markdown README explaining the project and its first-use path.",
+    "remediation": "Add a Markdown README explaining the project and its first-use path.",
+    "references": [
+      "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"
+    ],
+    "last_reviewed": "2026-10-08",
+    "paths": [
+      "README.md",
+      ".github/README.md",
+      "docs/README.md",
+      "readme.md"
+    ]
+  },
+  {
+    "id": "DOC-002",
+    "version": 1,
+    "title": "State purpose, audience and boundaries",
+    "category": "documentation",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/readme.md",
+    "review": "Ask an unfamiliar reader to identify what this does, for whom, and what it does not do.",
+    "remediation": "Ask an unfamiliar reader to identify what this does, for whom, and what it does not do.",
+    "references": [
+      "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "DOC-003",
+    "version": 1,
+    "title": "Provide a complete first-use sequence",
+    "category": "onboarding",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "readme-sections",
+    "guide": "handbook/readme.md",
+    "review": "Check prerequisites, clone or installation, working directory, commands and expected output. Alternate heading names are acceptable.",
+    "remediation": "Check prerequisites, clone or installation, working directory, commands and expected output. Alternate heading names are acceptable.",
+    "references": [
+      "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "DOC-004",
+    "version": 1,
+    "title": "Keep supported local Markdown targets resolvable",
+    "category": "documentation",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "local-links",
+    "guide": "handbook/automation.md",
+    "review": "Repair missing local files and references; manually verify deferred anchors and complex Markdown syntax.",
+    "remediation": "Repair missing local files and references; manually verify deferred anchors and complex Markdown syntax.",
+    "references": [
+      "https://docs.github.com/en/actions/reference/security/secure-use"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "DOC-005",
+    "version": 1,
+    "title": "Use purposeful and accessible badges",
+    "category": "presentation",
+    "priority": "low",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/badges.md",
+    "review": "Explain each badge claim, use meaningful alt text and a useful click target, and remove redundant decoration.",
+    "remediation": "Explain each badge claim, use meaningful alt text and a useful click target, and remove redundant decoration.",
+    "references": [
+      "https://shields.io/badges/git-hub-actions-workflow-status"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "DOC-006",
+    "version": 1,
+    "title": "Scope workflow badges to branch and event",
+    "category": "presentation",
+    "priority": "low",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "badge-scope",
+    "guide": "handbook/badges.md",
+    "review": "Set explicit branch and event parameters on recognised CI badge URLs. This is a playbook preference, not a platform requirement.",
+    "remediation": "Set explicit branch and event parameters on recognised CI badge URLs. This is a playbook preference, not a platform requirement.",
+    "references": [
+      "https://shields.io/badges/git-hub-actions-workflow-status"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "DOC-007",
+    "version": 1,
+    "title": "Disclose limitations and evidence",
+    "category": "documentation",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/documentation.md",
+    "review": "Separate implemented, tested, measured, inferred and unknown claims. Include environments for measurements.",
+    "remediation": "Separate implemented, tested, measured, inferred and unknown claims. Include environments for measurements.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "DOC-008",
+    "version": 1,
+    "title": "Provide useful documentation navigation",
+    "category": "documentation",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/documentation.md",
+    "review": "Keep the README as an entry point; link guides, reference, architecture and troubleshooting without duplicating authority.",
+    "remediation": "Keep the README as an entry point; link guides, reference, architecture and troubleshooting without duplicating authority.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "STRUCT-001",
+    "version": 1,
+    "title": "Explain the actual repository layout",
+    "category": "structure",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/structure.md",
+    "review": "Map source inputs, runtime code, tests, examples and generated outputs. Do not reorganise only to match a fashionable template.",
+    "remediation": "Map source inputs, runtime code, tests, examples and generated outputs. Do not reorganise only to match a fashionable template.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "STRUCT-002",
+    "version": 1,
+    "title": "Identify authoritative and generated files",
+    "category": "structure",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/structure.md",
+    "review": "Document source ownership and regeneration commands; prevent manual edits to derived content.",
+    "remediation": "Document source ownership and regeneration commands; prevent manual edits to derived content.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "STRUCT-003",
+    "version": 1,
+    "title": "Document editor whitespace conventions",
+    "category": "structure",
+    "priority": "low",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "file",
+    "guide": "handbook/structure.md",
+    "review": "Add a project-appropriate .editorconfig rather than relying on personal editor settings.",
+    "remediation": "Add a project-appropriate .editorconfig rather than relying on personal editor settings.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08",
+    "paths": [
+      ".editorconfig"
+    ]
+  },
+  {
+    "id": "COMM-001",
+    "version": 1,
+    "title": "Provide contribution instructions",
+    "category": "community",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "community",
+    "guide": "handbook/contribution.md",
+    "review": "Document setup, validation and review expectations. Check inherited defaults before declaring a local absence a failure.",
+    "remediation": "Document setup, validation and review expectations. Check inherited defaults before declaring a local absence a failure.",
+    "references": [
+      "https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file"
+    ],
+    "last_reviewed": "2026-10-08",
+    "paths": [
+      "CONTRIBUTING.md",
+      ".github/CONTRIBUTING.md",
+      "docs/CONTRIBUTING.md"
+    ]
+  },
+  {
+    "id": "COMM-002",
+    "version": 1,
+    "title": "Provide a private security reporting route",
+    "category": "security",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "community",
+    "guide": "handbook/security.md",
+    "review": "Document a verified private reporting channel and supported versions; do not publish vulnerability details in public issues.",
+    "remediation": "Document a verified private reporting channel and supported versions; do not publish vulnerability details in public issues.",
+    "references": [
+      "https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file"
+    ],
+    "last_reviewed": "2026-10-08",
+    "paths": [
+      "SECURITY.md",
+      ".github/SECURITY.md",
+      "docs/SECURITY.md"
+    ]
+  },
+  {
+    "id": "COMM-003",
+    "version": 1,
+    "title": "State contributor behaviour and enforcement",
+    "category": "community",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "community",
+    "guide": "handbook/contribution.md",
+    "review": "Provide a conduct policy with a real escalation route; presence alone does not establish enforceability.",
+    "remediation": "Provide a conduct policy with a real escalation route; presence alone does not establish enforceability.",
+    "references": [
+      "https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file"
+    ],
+    "last_reviewed": "2026-10-08",
+    "paths": [
+      "CODE_OF_CONDUCT.md",
+      ".github/CODE_OF_CONDUCT.md",
+      "docs/CODE_OF_CONDUCT.md"
+    ]
+  },
+  {
+    "id": "COMM-004",
+    "version": 1,
+    "title": "Make change review expectations discoverable",
+    "category": "community",
+    "priority": "low",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "file",
+    "guide": "handbook/contribution.md",
+    "review": "Add a lightweight PR template with purpose, verification and risk prompts.",
+    "remediation": "Add a lightweight PR template with purpose, verification and risk prompts.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08",
+    "paths": [
+      ".github/PULL_REQUEST_TEMPLATE.md",
+      "PULL_REQUEST_TEMPLATE.md",
+      "docs/PULL_REQUEST_TEMPLATE.md"
+    ]
+  },
+  {
+    "id": "COMM-005",
+    "version": 1,
+    "title": "Make ownership and triage workable",
+    "category": "community",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/contribution.md",
+    "review": "Explain who reviews which areas and how issues are triaged; a solo project need not pretend to have a committee.",
+    "remediation": "Explain who reviews which areas and how issues are triaged; a solo project need not pretend to have a committee.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "QUAL-001",
+    "version": 1,
+    "title": "Provide discoverable CI workflow configuration",
+    "category": "automation",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "workflow",
+    "guide": "handbook/automation.md",
+    "review": "Add appropriate automated checks. File presence is not evidence of passing runs or enforced checks.",
+    "remediation": "Add appropriate automated checks. File presence is not evidence of passing runs or enforced checks.",
+    "references": [
+      "https://docs.github.com/en/actions/reference/security/secure-use"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "QUAL-002",
+    "version": 1,
+    "title": "Test the documented behaviours",
+    "category": "quality",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/automation.md",
+    "review": "Review test assertions and run evidence, including examples, edge cases and failure paths; do not infer test quality from a script name.",
+    "remediation": "Review test assertions and run evidence, including examples, edge cases and failure paths; do not infer test quality from a script name.",
+    "references": [
+      "https://docs.github.com/en/actions/reference/security/secure-use"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "QUAL-003",
+    "version": 1,
+    "title": "Check generated-output freshness",
+    "category": "quality",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/automation.md",
+    "review": "Regenerate deterministically and compare without writing in PR checks. Route intentional changes through normal review.",
+    "remediation": "Regenerate deterministically and compare without writing in PR checks. Route intentional changes through normal review.",
+    "references": [
+      "https://docs.github.com/en/actions/reference/security/secure-use"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "QUAL-004",
+    "version": 2,
+    "title": "Cover observed dependency manifests in version-update policy",
+    "category": "quality",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "dependency-coverage",
+    "guide": "handbook/automation.md",
+    "review": "Compare actual external dependency directories and GitHub Action references with the checked-in Dependabot configuration. Check external updaters manually.",
+    "remediation": "Configure every relevant ecosystem and directory, or document verified alternative update automation. Do not assume root npm covers nested npm packages.",
+    "references": [
+      "https://docs.github.com/en/actions/reference/security/secure-use"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "SEC-001",
+    "version": 2,
+    "title": "Pin workflow Actions and avoid write-all tokens",
+    "category": "security",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "workflow-security",
+    "guide": "handbook/security.md",
+    "review": "Inspect external uses for full immutable commit hashes, look for write-all token grants, and manually review privileged events and unrecognised YAML patterns.",
+    "remediation": "Pin external Actions to reviewed full commit SHAs, avoid write-all, and inspect unusual YAML or privileged execution by hand.",
+    "references": [
+      "https://docs.github.com/en/actions/reference/security/secure-use"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "SEC-002",
+    "version": 1,
+    "title": "Require relevant checks before merging",
+    "category": "security",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "setting",
+    "guide": "handbook/security.md",
+    "review": "Inspect effective branch protection and rulesets, required contexts and bypasses. Files in the repository do not enforce settings.",
+    "remediation": "Inspect effective branch protection and rulesets, required contexts and bypasses. Files in the repository do not enforce settings.",
+    "references": [
+      "https://docs.github.com/en/actions/reference/security/secure-use"
+    ],
+    "last_reviewed": "2026-10-08",
+    "fact": "required_checks_enforced"
+  },
+  {
+    "id": "SEC-003",
+    "version": 1,
+    "title": "Keep untrusted execution out of privileged contexts",
+    "category": "security",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/security.md",
+    "review": "Trace pull-request code, artifacts and interpolation through privileged jobs. Never grant a documentation checker broad write access.",
+    "remediation": "Trace pull-request code, artifacts and interpolation through privileged jobs. Never grant a documentation checker broad write access.",
+    "references": [
+      "https://docs.github.com/en/actions/reference/security/secure-use"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "REL-001",
+    "version": 1,
+    "title": "Provide explicit licence text",
+    "category": "releases",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "file",
+    "guide": "handbook/releases.md",
+    "review": "Include the selected licence text and explain any code/data/upstream boundaries. Detection is not legal approval.",
+    "remediation": "Include the selected licence text and explain any code/data/upstream boundaries. Detection is not legal approval.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08",
+    "paths": [
+      "LICENSE",
+      "LICENSE.md",
+      "COPYING",
+      "LICENSE.txt"
+    ]
+  },
+  {
+    "id": "REL-002",
+    "version": 1,
+    "title": "Keep version and release policy consistent",
+    "category": "releases",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/releases.md",
+    "review": "Choose independent or synchronised package versions; align manifests, tags, runbooks and changelogs with that policy.",
+    "remediation": "Choose independent or synchronised package versions; align manifests, tags, runbooks and changelogs with that policy.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "REL-003",
+    "version": 1,
+    "title": "Verify the distributed installation path",
+    "category": "releases",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "library"
+    ],
+    "check": "manual",
+    "guide": "handbook/releases.md",
+    "review": "Test the built package in a fresh consumer directory, not just imports from the source tree.",
+    "remediation": "Test the built package in a fresh consumer directory, not just imports from the source tree.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "PERF-001",
+    "version": 1,
+    "title": "Control repository and history growth",
+    "category": "performance",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/performance.md",
+    "review": "Measure large objects and history separately from working-tree size. Do not rewrite shared history as an automatic fix.",
+    "remediation": "Measure large objects and history separately from working-tree size. Do not rewrite shared history as an automatic fix.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "PERF-002",
+    "version": 1,
+    "title": "Keep CI cost proportional to risk",
+    "category": "performance",
+    "priority": "low",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/performance.md",
+    "review": "Inspect duration, cache trust, redundant jobs, cancellation and retention; optimise measured bottlenecks rather than adding unsafe caching.",
+    "remediation": "Inspect duration, cache trust, redundant jobs, cancellation and retention; optimise measured bottlenecks rather than adding unsafe caching.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "AGENT-001",
+    "version": 1,
+    "title": "Provide project-specific agent instructions",
+    "category": "agent-readiness",
+    "priority": "low",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "file",
+    "guide": "handbook/agent-readiness.md",
+    "review": "Add concise AGENTS.md instructions for commands, boundaries, generated paths and evidence requirements.",
+    "remediation": "Add concise AGENTS.md instructions for commands, boundaries, generated paths and evidence requirements.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08",
+    "paths": [
+      "AGENTS.md"
+    ]
+  },
+  {
+    "id": "LIFE-001",
+    "version": 1,
+    "title": "Communicate maintenance status and handover",
+    "category": "lifecycle",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/lifecycle.md",
+    "review": "State experimental, active, maintenance or archived status and migration paths. Infrequent commits alone do not indicate abandonment.",
+    "remediation": "State experimental, active, maintenance or archived status and migration paths. Infrequent commits alone do not indicate abandonment.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "CAT-001",
+    "version": 1,
+    "title": "Record catalogue provenance and unknowns",
+    "category": "catalogue",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "catalogue"
+    ],
+    "check": "manual",
+    "guide": "handbook/catalogues.md",
+    "review": "Store primary sources, reviewed dates, schema constraints and explicit unknowns. Do not promote sourced claims to reproduced measurements.",
+    "remediation": "Store primary sources, reviewed dates, schema constraints and explicit unknowns. Do not promote sourced claims to reproduced measurements.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "CAT-002",
+    "version": 1,
+    "title": "Separate catalogue code, data and upstream rights",
+    "category": "catalogue",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "catalogue"
+    ],
+    "check": "manual",
+    "guide": "handbook/catalogues.md",
+    "review": "Explain what licence covers each material and preserve upstream ownership. A catalogue listing is not a grant of model rights.",
+    "remediation": "Explain what licence covers each material and preserve upstream ownership. A catalogue listing is not a grant of model rights.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "APP-001",
+    "version": 1,
+    "title": "Document environment and deployment boundaries",
+    "category": "application",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/applications.md",
+    "review": "Provide safe example configuration, deployment and rollback steps, and clearly separate client-visible from secret values.",
+    "remediation": "Provide safe example configuration, deployment and rollback steps, and clearly separate client-visible from secret values.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "APP-002",
+    "version": 1,
+    "title": "Document operation and recovery",
+    "category": "application",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/applications.md",
+    "review": "Explain monitoring, data backups, recovery checks and failure behaviour appropriate to the actual application.",
+    "remediation": "Explain monitoring, data backups, recovery checks and failure behaviour appropriate to the actual application.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  }
 ]

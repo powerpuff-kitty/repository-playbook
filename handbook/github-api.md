@@ -7,6 +7,8 @@ The `src/github.mjs` adapter makes bounded, **read-only GET** requests to GitHub
 ```sh
 node src/cli.mjs ../local-repo --profile library --github owner/repo
 node src/cli.mjs ../local-repo --profile library --github owner/repo --format json > ../report.json
+node src/cli.mjs ../local-repo --profile library --github owner/repo --compare-remote --format json > ../compared.json
+node src/cli.mjs ../local-repo --profile library --github owner/repo --compare-remote --format json > ../compared.json
 node src/github-cli.mjs owner/repo > ../github-facts.json
 node src/cli.mjs ../local-repo --profile library --facts ../github-facts.json
 ```
@@ -29,7 +31,7 @@ GitHub's [active branch rules endpoint](https://docs.github.com/en/rest/repos/ru
 
 - Requests are restricted to `https://api.github.com/repos/…`, follow no redirects, use a finite timeout, cap JSON responses at 1 MiB, cap requests at 30 and list pagination at five pages. Link headers cannot send the adapter to another host or endpoint.
 - No background retries, token logging, or external hosts. A rate limit, 403, 404 ambiguity, timeout, truncated page collection or hidden bypass becomes **unknown** rather than a convenient positive.
-- Results include the API observation time and a remote default-branch revision when available. **The local checkout is not compared with that revision**. Do not cite the result as validation of deployed or published code.
+- Results include the API observation time and a remote default-branch revision when available. **The local checkout is not compared with that revision unless `--compare-remote` is explicitly set**. Do not cite the result as validation of deployed or published code.
 - Presence and required-check observations are narrow. A `SECURITY.md` file is not proof of a working private disclosure route; a required check can be flaky, ineffective, or inappropriate. Review controls, permissions, bypasses and real behaviours separately.
 - Tokens only leave as Authorization headers to the fixed GitHub API origin. Consult GitHub's current API version and permissions if endpoints evolve; the adapter uses a versioned REST header.
 

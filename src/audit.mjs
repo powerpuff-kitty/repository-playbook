@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { snapshot, localLinks, stripCode } from './scan.mjs';
 import { loadModel, STATES, HOME, readJson, validateSchema } from './model.mjs';
 import path from 'node:path';
+import { workflowSecurity, dependencyCoverage } from './policy.mjs';
 
 const finding = (status, summary, evidence = []) => ({ status, summary, evidence });
 const E = (location, observation) => ({ location, observation });
@@ -33,6 +34,8 @@ export function evaluate(rule, scan, options = {}) {
       if (skipped.length) return finding('unknown', 'Expected file not observed, but the bounded scan was incomplete.');
       return finding('fail', `No nonempty file found at: ${rule.paths.join(', ')}.`, rule.paths.map(p => E(p, files.has(p) ? 'Empty or unreadable.' : 'Not found.')));
     }
+    case 'workflow-security': return workflowSecurity(scan);
+    case 'dependency-coverage': return dependencyCoverage(scan);
     case 'workflow': {
       const paths = [...files.keys()].filter(p => /^\.github\/workflows\/[^/]+\.ya?ml$/.test(p));
       if (paths.some(p => files.get(p)?.trim())) return finding('pass', 'Workflow file found. Execution, syntax and branch enforcement are separate checks.', paths.map(p => E(p, 'Workflow path.')));
@@ -76,16 +79,17 @@ export async function audit(directory, options = {}) {
   }
   const now = options.now ?? new Date();
   if (!(now instanceof Date) || !Number.isFinite(now.getTime())) throw new Error('Invalid audit time');
-  const scan = await snapshot(directory);
+  const scan = options.scan ?? await snapshot(directory);
   const digest = createHash('sha256');
   for (const [name, content] of [...scan.files].sort(([a], [b]) => a.localeCompare(b, 'en'))) digest.update(JSON.stringify([name, content]) + '\n');
   const results = rules.map(rule => ({ rule_id: rule.id, rule_version: rule.version, title: rule.title, category: rule.category, priority: rule.priority, basis: rule.basis, guide: rule.guide, remediation: rule.remediation, ...(!rule.profiles.includes(profile.id) ? finding('not-applicable', `Not selected by profile ${profile.id}.`) : evaluate(rule, scan, { ...options, now })) }));
   const counts = Object.fromEntries(STATES.map(state => [state, results.filter(f => f.status === state).length]));
   const applicable = results.length - counts['not-applicable'];
   return {
-    schema_version: 1, tool_version: '0.2.0', observed_at: now.toISOString(),
+    schema_version: 1, tool_version: '0.3.0', observed_at: now.toISOString(),
     repository: options.repository ?? options.facts?.repository ?? null,
-    revision: null, revision_note: 'Git revision not inspected. Facts snapshot revision is not assumed to match local files.',
+    revision: null, revision_note: options.remoteComparison ? 'Selected local file blobs may be compared with the reported GitHub revision, but full checkout identity remains unverified.' : 'Git revision not inspected. Facts snapshot revision is not assumed to match local files.',
+    ...(options.remoteComparison ? { remote_file_comparison: options.remoteComparison } : {}),
     files_digest: `sha256:${digest.digest('hex')}`, digest_scope: 'Names and readable text only; excluded and non-text contents are not hashed.',
     profile: profile.id, counts, coverage: { resolved: counts.pass + counts.fail, applicable, ratio: applicable ? (counts.pass + counts.fail) / applicable : null },
     exclusions: scan.skipped, source: { mode: options.factsKind === 'github-api' ? 'local+github-api' : options.facts ? 'local+supplied-facts' : 'local', facts_observed_at: options.facts?.observed_at ?? null, facts_revision: options.facts?.revision ?? null }, findings: results
@@ -96,5 +100,7 @@ export function markdown(report) {
   const escape = s => String(s).replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/[&<>|`\[\]]/g, c => `&#${c.charCodeAt(0)};`);
   const rows = report.findings.map(f => `| ${escape(f.rule_id)} | ${f.status} | ${f.priority} | ${escape(f.summary)} |`);
   const evidence = report.findings.filter(f => f.status !== 'not-applicable').map(f => `\n### ${f.rule_id} — ${escape(f.title)}\n\n${escape(f.remediation)}\n\nGuide: ${escape(f.guide)}\n\n${f.evidence.map(e => `- ${escape(e.location)}: ${escape(e.observation)}`).join('\n')}`);
-  return `# Repository audit\n\nProfile: **${report.profile}** · Observed: ${report.observed_at}\n\nRepository: ${escape(report.repository ?? 'local checkout (identity not verified)')}\n\nResolved checks: **${report.coverage.resolved}/${report.coverage.applicable}**. This is inspection coverage, not a quality score.\n\n${Object.entries(report.counts).map(([s, n]) => `${s}: ${n}`).join(' · ')}\n\n| Rule | Status | Priority | Observation |\n|---|---|---|---|\n${rows.join('\n')}\n${evidence.join('\n')}\n\n## Limitations\n\nRead-only bounded local scan; no target scripts or Git commands executed. Network is used only when explicitly requested with --github; local files are not proven to match the remote revision. Caller-supplied snapshots are not live API verification. See the JSON report for exclusions and digest scope. No security certification is implied.\n`;
+  const comparison = report.remote_file_comparison;
+  const comparisonBlock = comparison ? `Remote file sample: **${escape(comparison.status)}** at ${escape(comparison.revision ?? 'unknown revision')}. ${escape(comparison.scope)}\n\n${comparison.files.map(f => `- ${escape(f.path)}: ${escape(f.status)} — ${escape(f.reason)}`).join('\n')}\n\n` : '';
+  return `# Repository audit\n\nProfile: **${report.profile}** · Observed: ${report.observed_at}\n\nRepository: ${escape(report.repository ?? 'local checkout (identity not verified)')}\n\n${comparisonBlock}Resolved checks: **${report.coverage.resolved}/${report.coverage.applicable}**. This is inspection coverage, not a quality score.\n\n${Object.entries(report.counts).map(([s, n]) => `${s}: ${n}`).join(' · ')}\n\n| Rule | Status | Priority | Observation |\n|---|---|---|---|\n${rows.join('\n')}\n${evidence.join('\n')}\n\n## Limitations\n\nRead-only bounded local scan; no target scripts or Git commands executed. Network is used only when explicitly requested with --github; a selected-file hash comparison, if requested, does not prove a full checkout revision match. Caller-supplied snapshots are not live API verification. See the JSON report for exclusions and digest scope. No security certification is implied.\n`;
 }

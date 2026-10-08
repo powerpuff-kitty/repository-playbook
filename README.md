@@ -45,10 +45,14 @@ To inspect actual GitHub settings **only when requested**:
 ```sh
 node src/cli.mjs ../your-project --profile library --github owner/repo
 node src/github-cli.mjs owner/repo > ../github-facts.json
+# Extra opt-in GitHub requests for selected file-hash comparison
+node src/cli.mjs ../your-project --profile library --github owner/repo --compare-remote --format json > ../compared.json
+# Optional: verify a bounded sample of local file hashes against the exact remote revision
+node src/cli.mjs ../your-project --profile library --github owner/repo --compare-remote --format json > ../compared.json
 # Optional for private repositories: export GITHUB_TOKEN with read-only access
 ```
 
-`--github` performs bounded GET requests to GitHub.com, checks default-branch requirements and community defaults, and records API sources. The checkout is never uploaded and is **not proved to match** the remote revision. The offline `--facts ../observations.json` alternative remains supported; the two flags are mutually exclusive. See [GitHub adapter](handbook/github-api.md), [snapshot format](handbook/auditor.md), and [illustrative fixture](examples/facts.json). Stale snapshots older than 30 days are not passing evidence.
+`--github` performs bounded GET requests to GitHub.com, checks default-branch requirements and community defaults, and records API sources. The checkout is never uploaded. Optional `--compare-remote` checks SHA-1 Git blob hashes of up to 10 selected readable documentation/configuration files against metadata at the remote commit, but **does not prove that the entire checkout or source tree matches**. The offline `--facts ../observations.json` alternative remains supported; the two flags are mutually exclusive. See [GitHub adapter](handbook/github-api.md), [snapshot format](handbook/auditor.md), and [illustrative fixture](examples/facts.json). Stale snapshots older than 30 days are not passing evidence.
 
 ## Usage: authors and maintainers
 
@@ -84,7 +88,7 @@ generated/      derived applicability matrix
 
 The local auditor never runs target scripts or Git commands and never accesses the network unless `--github` is explicitly set. The online adapter only makes bounded GET requests to `api.github.com`; it never uploads local contents. The filesystem scanner skips symlinks and common generated/vendor directories, bounds text reads and reports exclusions. Audit a stable copy of untrusted content: these checks are **not a sandbox against hostile concurrent filesystem changes**.
 
-Local-link checking covers a documented Markdown subset; external URLs, complex syntax and some anchors require other tools or review. Workflow security, version-policy consistency and licence boundaries require manual review in this release. A caller-supplied settings snapshot is not independent API verification. A live GitHub observation proves only a narrow setting and does not prove that the local checkout matches the remote revision. See [the full contract](handbook/auditor.md).
+Local-link checking covers a documented Markdown subset; external URLs, complex syntax and some anchors require other tools or review. The static workflow and dependency-update detectors cover only documented safe-to-parse subsets; unsupported YAML and indirect trust flows require manual review. Version-policy consistency and licence boundaries still require review. A caller-supplied settings snapshot is not independent API verification. A live GitHub observation proves only a narrow setting; even a matching remote-file sample does not prove full checkout identity. See [the full contract](handbook/auditor.md).
 
 ## Rule catalogue
 
@@ -114,8 +118,8 @@ Local-link checking covers a documented Markdown subset; external URLs, complex 
 | QUAL-001 | [Provide discoverable CI workflow configuration](handbook/automation.md) | medium | workflow |
 | QUAL-002 | [Test the documented behaviours](handbook/automation.md) | high | manual |
 | QUAL-003 | [Check generated-output freshness](handbook/automation.md) | medium | manual |
-| QUAL-004 | [Cover all dependency manifests](handbook/automation.md) | high | manual |
-| SEC-001 | [Review Action references and permissions](handbook/security.md) | high | manual |
+| QUAL-004 | [Cover observed dependency manifests in version-update policy](handbook/automation.md) | high | dependency-coverage |
+| SEC-001 | [Pin workflow Actions and avoid write-all tokens](handbook/security.md) | high | workflow-security |
 | SEC-002 | [Require relevant checks before merging](handbook/security.md) | high | setting |
 | SEC-003 | [Keep untrusted execution out of privileged contexts](handbook/security.md) | high | manual |
 | REL-001 | [Provide explicit licence text](handbook/releases.md) | high | file |
@@ -135,4 +139,4 @@ Local-link checking covers a documented Markdown subset; external URLs, complex 
 
 Use [CONTRIBUTING.md](CONTRIBUTING.md) for rule proposals, tests and evidence expectations. Report false positives through the issue form. Security concerns follow [SECURITY.md](SECURITY.md), not public exploit reports. See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for participation expectations.
 
-Status: **experimental v0.2.0**. Behaviour and report contracts may evolve; breaking changes will be documented in [CHANGELOG.md](CHANGELOG.md). All original code, guidance and templates in this repository use the [MIT licence](LICENSE). Linked upstream projects retain their own terms.
+Status: **experimental v0.3.0**. Behaviour and report contracts may evolve; breaking changes will be documented in [CHANGELOG.md](CHANGELOG.md). All original code, guidance and templates in this repository use the [MIT licence](LICENSE). Linked upstream projects retain their own terms.
