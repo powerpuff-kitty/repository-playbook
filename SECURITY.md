@@ -8,6 +8,6 @@ If private reporting is unavailable and no existing private maintainer contact i
 
 ## Scope and supported versions
 
-The current experimental 0.1.x code is the only supported line. The tool is a bounded static reader, not a sandbox or a security certification. Audit stable local copies. No target code, network requests, Git commands or writes to the target are permitted by the CLI.
+The current experimental 0.4.x code is the only supported line. The tool is a bounded static reader, not a sandbox or a security certification. Audit stable local copies. The offline scanner never executes target code, makes network requests, invokes Git or writes to the target. The separate, explicitly enabled GitHub adapter makes bounded read-only GET requests to `api.github.com`; it never uploads local contents or writes to GitHub. See [the adapter contract](handbook/github-api.md) for permissions and evidence limits.
 
 Report path-boundary escapes, unsafe execution, unbounded input handling, misleading evidence promotion or report injection. Provide a minimal synthetic fixture privately after a channel is established. Never supply real credentials or sensitive repository data.
