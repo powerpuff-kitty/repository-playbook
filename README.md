@@ -55,11 +55,9 @@ To inspect actual GitHub settings **only when requested**:
 ```sh
 node src/cli.mjs ../your-project --profile library --github owner/repo
 node src/github-cli.mjs owner/repo > ../github-facts.json
-# Extra opt-in GitHub requests for selected file-hash comparison
+# Optional: compare selected local file hashes against the remote revision
 node src/cli.mjs ../your-project --profile library --github owner/repo --compare-remote --format json > ../compared.json
-# Optional: verify a bounded sample of local file hashes against the exact remote revision
-node src/cli.mjs ../your-project --profile library --github owner/repo --compare-remote --format json > ../compared.json
-# Optional for private repositories: export GITHUB_TOKEN with read-only access
+# Private repository reads may require GITHUB_TOKEN with read-only access
 ```
 
 `--github` performs bounded GET requests to GitHub.com, checks default-branch requirements and community defaults, and records API sources. The checkout is never uploaded. Optional `--compare-remote` checks SHA-1 Git blob hashes of up to 10 selected readable documentation/configuration files against metadata at the remote commit, but **does not prove that the entire checkout or source tree matches**. The offline `--facts ../observations.json` alternative remains supported; the two flags are mutually exclusive. See [GitHub adapter](handbook/github-api.md), [snapshot format](handbook/auditor.md), and [illustrative fixture](examples/facts.json). Stale snapshots older than 30 days are not passing evidence.
@@ -166,4 +164,4 @@ Local-link checking covers a documented Markdown subset; external URLs, complex 
 
 Use [CONTRIBUTING.md](CONTRIBUTING.md) for rule proposals, tests and evidence expectations. Report false positives through the issue form. Security concerns follow [SECURITY.md](SECURITY.md), not public exploit reports. See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for participation expectations.
 
-Status: **experimental v0.3.0**. Behaviour and report contracts may evolve; breaking changes will be documented in [CHANGELOG.md](CHANGELOG.md). All original code, guidance and templates in this repository use the [MIT licence](LICENSE). Linked upstream projects retain their own terms.
+Status: **experimental v0.4.0**. Behaviour and report contracts may evolve; breaking changes will be documented in [CHANGELOG.md](CHANGELOG.md). All original code, guidance and templates in this repository use the [MIT licence](LICENSE). Linked upstream projects retain their own terms.
