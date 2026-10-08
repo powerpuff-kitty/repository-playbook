@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0 — 2026-10-08
+
+Add opt-in GitHub.com REST inspection via `--github OWNER/REPO` and an independent `src/github-cli.mjs` facts exporter. The adapter makes bounded GET requests, validates destinations, refuses redirects, limits pagination/response size and distinguishes missing facts, rate limits and hidden bypasses from observed failures. Adds metadata, branch/ruleset required checks and effective public community defaults, with dated evidence and regression coverage. Offline use remains unchanged; remote revision is not assumed to match local files. No package publication or hosted deployment.
+
 ## 0.1.0 — 2026-10-08
 
 Initial implementation: 36 versioned rules, four profiles, a practical handbook, annotated templates and an embedded-AI case study. Includes a dependency-free offline audit CLI, five-state evidence reports, explicit failure thresholds, optional dated settings snapshots, schema/reference validation, deterministic generated outputs, regression tests and a standalone rule explorer build.

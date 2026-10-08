@@ -2,28 +2,33 @@
 import { parseArgs } from 'node:util';
 import { open } from 'node:fs/promises';
 import { audit, markdown } from './audit.mjs';
+import { collectGitHubFacts, repositoryName } from './github.mjs';
 
-const usage = `Repository Playbook 0.1.0 (local checkout; not published on npm)
+const usage = `Repository Playbook 0.2.0 (local checkout; not published on npm)
 Usage: node src/cli.mjs [directory] [options]
   --profile documentation|catalogue|library|application
   --format markdown|json       Default: markdown
   --facts FILE                 Optional dated, schema-validated settings observations
+  --github OWNER/REPO          Opt into read-only GitHub.com API observations (network)
   --repository OWNER/REPO      Optional display identity (caller supplied)
   --fail-on high|medium|low|none  Failure threshold; default none
   --help
 Exit codes: 0 report produced; 1 selected fail findings; 2 input/runtime error.
-No target commands, writes, Git commands or network requests are performed.
+No target commands, writes or Git commands. Network only with --github.
 Redirect stdout to save a report; do not overwrite files in the audited checkout.
 `;
 try {
-  const { values, positionals } = parseArgs({ allowPositionals: true, strict: true, options: { profile: { type: 'string', default: 'documentation' }, format: { type: 'string', default: 'markdown' }, facts: { type: 'string' }, repository: { type: 'string' }, 'fail-on': { type: 'string', default: 'none' }, help: { type: 'boolean' } } });
+  const { values, positionals } = parseArgs({ allowPositionals: true, strict: true, options: { profile: { type: 'string', default: 'documentation' }, format: { type: 'string', default: 'markdown' }, facts: { type: 'string' }, github: { type: 'string' }, repository: { type: 'string' }, 'fail-on': { type: 'string', default: 'none' }, help: { type: 'boolean' } } });
   if (values.help) process.stdout.write(usage);
   else {
     if (positionals.length > 1) throw new Error('Only one directory is allowed');
     if (!['markdown', 'json'].includes(values.format)) throw new Error('Unknown format');
     const priorities = ['high', 'medium', 'low'];
     if (![...priorities, 'none'].includes(values['fail-on'])) throw new Error('Unknown failure threshold');
-    if (values.repository && !/^[A-Za-z0-9_.-]+\/[A-Za-z0-9_.-]+$/.test(values.repository)) throw new Error('Expected owner/repo identity');
+    if (values.repository) repositoryName(values.repository);
+    if (values.github) repositoryName(values.github);
+    if (values.github && values.facts) throw new Error('--github and --facts are mutually exclusive');
+    if (values.github && values.repository && values.repository.toLowerCase() !== values.github.toLowerCase()) throw new Error('GitHub and display repository identities do not match');
     let facts;
     if (values.facts) {
       const handle = await open(values.facts, 'r');
@@ -42,9 +47,10 @@ try {
         text = buffer.subarray(0, size).toString('utf8');
       } finally { await handle.close(); }
       facts = JSON.parse(text);
-      if (values.repository && values.repository !== facts.repository) throw new Error('Facts repository identity mismatch');
+      if (values.repository && values.repository.toLowerCase() !== facts.repository.toLowerCase()) throw new Error('Facts repository identity mismatch');
     }
-    const report = await audit(positionals[0] ?? '.', { profile: values.profile, facts, repository: values.repository });
+    if (values.github) facts = await collectGitHubFacts(values.github, { token: process.env.GITHUB_TOKEN ?? '' });
+    const report = await audit(positionals[0] ?? '.', { profile: values.profile, facts, factsKind: values.github ? 'github-api' : 'supplied', repository: values.repository ?? (values.github ? facts.repository : undefined) });
     process.stdout.write(values.format === 'json' ? JSON.stringify(report, null, 2) + '\n' : markdown(report));
     if (values['fail-on'] !== 'none' && report.findings.some(f => f.status === 'fail' && priorities.indexOf(f.priority) <= priorities.indexOf(values['fail-on']))) process.exitCode = 1;
   }

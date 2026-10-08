@@ -4,11 +4,15 @@
 
 The handbook, 36 canonical rules, four baseline profiles, reusable templates, annotated examples and the embedded-AI case study form the initial knowledge base. The offline CLI performs bounded local inspection, accepts explicit dated facts and emits Markdown or JSON findings. Tests, schema/reference validation, deterministic rule generation, self-audit CI and a standalone explorer build are included.
 
+## Implemented in 0.2.0
+
+Add optional, bounded read-only GitHub.com collection for descriptions/topics, default-branch check requirements, inherited community files and dated evidence. Handle pagination, missing permissions, rate limits and ruleset bypass visibility conservatively. Expose `--github OWNER/REPO` and a snapshot-export CLI, retaining offline-only behaviour by default. GitHub CI validates mocked transport and adversarial fixtures; no external source code is executed or local content uploaded.
+
 ## P1 — Verification and adoption
 
 Establish and verify private security and conduct reporting routes. Configure effective required checks after the `quality` job has run; inspect bypasses rather than assuming a file enables protection. Populate accurate About metadata. These settings are not changed by the auditor or this bootstrap.
 
-Add a read-only GitHub adapter with pagination, rate-limit handling, least-privilege permissions, provenance and inherited community defaults. Inspect effective protections/rulesets and treat inaccessible settings as unknown. Keep it optional so offline use remains complete.
+Extend live evidence to richer GitHub workflow/check metadata, private vulnerability reporting and audit-to-remote revision matching. The current GitHub adapter covers only documented facts and intentionally leaves hidden bypasses and inaccessible settings unknown.
 
 Replace or complement the Markdown subset with a vetted full parser and dedicated link checker. Retain advisory handling for external timeouts, redirects and private endpoints. Add more false-positive fixtures before increasing automated coverage.
 

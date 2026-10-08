@@ -1,9 +1,9 @@
 {
   "name": "repository-playbook",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "Evidence-backed repository guidance, profiles, templates and an offline read-only auditor.",
+  "description": "Evidence-backed repository guidance, profiles, templates, an offline auditor and opt-in read-only GitHub API observations.",
   "license": "MIT",
   "engines": { "node": ">=22" },
   "scripts": {

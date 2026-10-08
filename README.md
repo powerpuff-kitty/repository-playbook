@@ -9,13 +9,13 @@
 
 ## What this is
 
-A practical handbook and an offline auditor for **documentation repositories, catalogues, libraries and applications**. The catalogue connects each rule to its rationale, applicability, evidence, references and remediation. The full rule table is generated below from one canonical source.
+A practical handbook, an offline auditor and optional read-only GitHub settings collection for **documentation repositories, catalogues, libraries and applications**. The catalogue connects each rule to its rationale, applicability, evidence, references and remediation. The full rule table is generated below from one canonical source.
 
 This is not a star-growth service, a security certification or a universal repository score. A file can exist while its instructions are wrong; a workflow can pass without being required on the default branch. Those are different observations.
 
 ## Prerequisites
 
-Node.js 22 or newer is required for the tools. Git is only needed to obtain a checkout. There are **no npm dependencies** and no API token is needed. Reading the handbook needs neither Node nor an account.
+Node.js 22 or newer is required for the tools. Git is only needed to obtain a checkout. There are **no npm dependencies**. Offline audits and reading the handbook need no API token; live GitHub observations are explicitly opt-in and may need a read-only `GITHUB_TOKEN` for private repositories.
 
 ## Quick start
 
@@ -40,7 +40,15 @@ node src/cli.mjs ../your-project --profile catalogue --fail-on high
 
 The report records `pass`, `fail`, `not-applicable`, `unknown` and `manual-review`, with evidence and remediation. The ratio is **inspection coverage, not a quality score**. Default exit status is zero when a report is produced; `--fail-on` opts into gating actual failures. Unknowns and manual reviews do not silently become passes or failures.
 
-`--facts ../observations.json` accepts optional dated, caller-supplied GitHub observations. See [the snapshot format](handbook/auditor.md) and [illustrative fixture](examples/facts.json). No live GitHub API adapter exists yet. Snapshots older than 30 days are not used as passing evidence.
+To inspect actual GitHub settings **only when requested**:
+
+```sh
+node src/cli.mjs ../your-project --profile library --github owner/repo
+node src/github-cli.mjs owner/repo > ../github-facts.json
+# Optional for private repositories: export GITHUB_TOKEN with read-only access
+```
+
+`--github` performs bounded GET requests to GitHub.com, checks default-branch requirements and community defaults, and records API sources. The checkout is never uploaded and is **not proved to match** the remote revision. The offline `--facts ../observations.json` alternative remains supported; the two flags are mutually exclusive. See [GitHub adapter](handbook/github-api.md), [snapshot format](handbook/auditor.md), and [illustrative fixture](examples/facts.json). Stale snapshots older than 30 days are not passing evidence.
 
 ## Usage: authors and maintainers
 
@@ -65,7 +73,7 @@ templates/      explained starting points; never blindly applied
 examples/       annotated patterns and fictional test observations
 case-studies/   dated reviews with exact source revisions
 tools/          existing projects to reuse rather than replace
-src/            bounded offline scanner, checks and CLI
+src/            bounded offline scanner, checks, CLI and optional API reader
 scripts/        validation, deterministic generation and site build
 tests/          node:test unit, integration and adversarial fixtures
 generated/      derived applicability matrix
@@ -74,9 +82,9 @@ generated/      derived applicability matrix
 
 ## Limitations and safety
 
-The auditor never runs target scripts, Git commands or network requests. It skips symlinks and common generated/vendor directories, bounds text reads and reports exclusions. Audit a stable copy of untrusted content: these checks are **not a sandbox against hostile concurrent filesystem changes**.
+The local auditor never runs target scripts or Git commands and never accesses the network unless `--github` is explicitly set. The online adapter only makes bounded GET requests to `api.github.com`; it never uploads local contents. The filesystem scanner skips symlinks and common generated/vendor directories, bounds text reads and reports exclusions. Audit a stable copy of untrusted content: these checks are **not a sandbox against hostile concurrent filesystem changes**.
 
-Local-link checking covers a documented Markdown subset; external URLs, complex syntax and some anchors require other tools or review. Workflow security, version-policy consistency and licence boundaries require manual review in this release. A settings snapshot is supplied evidence, not an independent API verification. See [the full contract](handbook/auditor.md).
+Local-link checking covers a documented Markdown subset; external URLs, complex syntax and some anchors require other tools or review. Workflow security, version-policy consistency and licence boundaries require manual review in this release. A caller-supplied settings snapshot is not independent API verification. A live GitHub observation proves only a narrow setting and does not prove that the local checkout matches the remote revision. See [the full contract](handbook/auditor.md).
 
 ## Rule catalogue
 
@@ -127,4 +135,4 @@ Local-link checking covers a documented Markdown subset; external URLs, complex 
 
 Use [CONTRIBUTING.md](CONTRIBUTING.md) for rule proposals, tests and evidence expectations. Report false positives through the issue form. Security concerns follow [SECURITY.md](SECURITY.md), not public exploit reports. See [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for participation expectations.
 
-Status: **experimental v0.1.0**. Behaviour and report contracts may evolve; breaking changes will be documented in [CHANGELOG.md](CHANGELOG.md). All original code, guidance and templates in this repository use the [MIT licence](LICENSE). Linked upstream projects retain their own terms.
+Status: **experimental v0.2.0**. Behaviour and report contracts may evolve; breaking changes will be documented in [CHANGELOG.md](CHANGELOG.md). All original code, guidance and templates in this repository use the [MIT licence](LICENSE). Linked upstream projects retain their own terms.
