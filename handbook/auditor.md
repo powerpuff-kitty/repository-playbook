@@ -32,8 +32,6 @@ node src/cli.mjs ../project --profile catalogue --facts ../facts.json --format j
 node src/cli.mjs ../project --profile documentation --fail-on medium
 node src/cli.mjs ../project --profile library --github owner/repo
 node src/cli.mjs ../project --profile library --github owner/repo --compare-remote --format json
-node src/cli.mjs ../project --profile library --github owner/repo
-node src/cli.mjs ../project --profile library --github owner/repo --compare-remote --format json --compare-remote --format json
 node src/github-cli.mjs owner/repo > ../github-observations.json
 ```
 
