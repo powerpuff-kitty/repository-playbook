@@ -5,13 +5,23 @@
 [![CI on main pushes](https://img.shields.io/github/actions/workflow/status/powerpuff-kitty/repository-playbook/ci.yml?branch=main&event=push&label=checks)](https://github.com/powerpuff-kitty/repository-playbook/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
 
-[Start here](handbook/getting-started.md) · [Profiles](generated/profile-matrix.md) · [Templates](templates/README.md) · [Case study](case-studies/embedded-ai/README.md) · [Roadmap](ROADMAP.md)
+[Start here](handbook/getting-started.md) · [Presentation](handbook/presentation.md) · [Visibility](handbook/discoverability.md) · [Completeness](handbook/completeness.md) · [Profiles](generated/profile-matrix.md) · [Templates](templates/README.md) · [Case study](case-studies/embedded-ai/README.md) · [Roadmap](ROADMAP.md)
 
 ## What this is
 
 A practical handbook, an offline auditor and optional read-only GitHub settings collection for **documentation repositories, catalogues, libraries and applications**. The catalogue connects each rule to its rationale, applicability, evidence, references and remediation. The full rule table is generated below from one canonical source.
 
 This is not a star-growth service, a security certification or a universal repository score. A file can exist while its instructions are wrong; a workflow can pass without being required on the default branch. Those are different observations.
+
+## Presentation, visibility and completeness
+
+The auditor now treats **presentation**, **visibility/discoverability**, **completeness for the stated scope**, and **engineering controls** as separate dimensions. Markdown and JSON reports display per-dimension pass, fail, unknown and manual-review counts plus **inspection coverage — not a quality, SEO or completion score**.
+
+- **Presentation:** README heading/intro, substantive image alt text, badges, screenshots and social-preview review. Visual attractiveness and rendered layouts remain manual.
+- **Visibility:** GitHub About description and topics, homepage presence, intentional public/private state, archive context and GitHub licence-classification discrepancies. Metadata presence is not topic relevance or search ranking.
+- **Completeness:** narrow README placeholder detection and explicit human checks for reproducible examples, real feature behaviour, release installation, limitations and planned-versus-shipped scope.
+
+The `--github` option is required for live About metadata; offline checks remain network-free. A GitHub **Other** licence label is an *advisory*, especially for multi-licence repos — not evidence that their legal licences are invalid. Repository social preview cannot be reliably established from the supported read-only API and needs a manual browser check. No artificial badge counts, screenshot requirements or popularity thresholds are imposed.
 
 ## Prerequisites
 
@@ -93,7 +103,7 @@ Local-link checking covers a documented Markdown subset; external URLs, complex 
 ## Rule catalogue
 
 <!-- RULES:START -->
-**36 rules · 4 profiles.** Presence checks are not content-quality certification.
+**53 rules · 4 profiles.** Presence checks are not content-quality certification.
 
 | Rule | Guidance | Priority | Verification |
 |---|---|---|---|
@@ -133,6 +143,23 @@ Local-link checking covers a documented Markdown subset; external URLs, complex 
 | CAT-002 | [Separate catalogue code, data and upstream rights](handbook/catalogues.md) | high | manual |
 | APP-001 | [Document environment and deployment boundaries](handbook/applications.md) | high | manual |
 | APP-002 | [Document operation and recovery](handbook/applications.md) | high | manual |
+| PRES-001 | [Present a title and useful introduction above the fold](handbook/presentation.md) | medium | readme-first-screen |
+| PRES-002 | [Describe nondecorative documentation images accessibly](handbook/presentation.md) | medium | image-presentation |
+| PRES-003 | [Review first-screen hierarchy and badge density](handbook/presentation.md) | medium | manual |
+| PRES-004 | [Review social preview and share-card representation](handbook/presentation.md) | low | manual |
+| PRES-005 | [Keep product imagery representative of current behaviour](handbook/presentation.md) | medium | manual |
+| DISC-003 | [Configure a useful homepage or docs destination when relevant](handbook/discoverability.md) | medium | setting-advisory |
+| DISC-004 | [Choose intentional public, private or internal visibility](handbook/discoverability.md) | medium | setting-context |
+| DISC-005 | [Investigate an unrecognized GitHub licence label](handbook/discoverability.md) | medium | setting-advisory |
+| DISC-006 | [Make archive state match the repository lifecycle](handbook/discoverability.md) | low | setting-context |
+| DISC-007 | [Keep About metadata, topics and README scope consistent](handbook/discoverability.md) | high | manual |
+| DISC-008 | [Review hosted documentation discovery and share metadata](handbook/discoverability.md) | low | manual |
+| COMP-001 | [Review explicit unfinished README placeholders](handbook/completeness.md) | medium | placeholder-review |
+| COMP-002 | [Reconcile advertised features with demonstrable behaviour](handbook/completeness.md) | high | manual |
+| COMP-003 | [Validate the complete first-user journey](handbook/completeness.md) | high | manual |
+| COMP-004 | [Distinguish complete, experimental and planned scope](handbook/completeness.md) | medium | manual |
+| COMP-005 | [Verify release, installation and support expectations](handbook/completeness.md) | medium | manual |
+| COMP-006 | [Match demo and example data with actual outputs](handbook/completeness.md) | medium | manual |
 <!-- RULES:END -->
 
 ## Contributing and help

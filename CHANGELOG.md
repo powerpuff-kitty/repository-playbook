@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0 — 2026-10-08
+
+Add a four-dimension presentation/visibility/completeness/engineering report, 17 narrowly scoped rules (53 total), README hero and image-alt inventory, editorial placeholder review and explicit product-readiness checks. The opt-in GitHub facts collector now records homepage presence, public/private context, archived context and SPDX classifier recognition, keeping absent homepage and GitHub `Other`/NOASSERTION classification as advisory rather than failures. Intentional visibility and archival policy remain human review items.
+
+Add handbook guides for presentation and evidence-backed completeness, expand discoverability and the embedded-AI screenshot case study, and add negative-case tests. No rendered visual scoring, external SEO promises, site uptime guarantees, social-preview scraping or automatic feature-completion grades. Offline and read-only guarantees remain unchanged.
+
 ## 0.3.0 — 2026-10-08
 
 Add conservative local checks for mutable GitHub Action references and explicit `write-all` tokens (`SEC-001` version 2), plus manifest-to-Dependabot ecosystem/directory coverage (`QUAL-004` version 2). Unusual YAML, alternate updater services and inaccessible inputs remain manual/unknown.

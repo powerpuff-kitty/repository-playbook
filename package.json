@@ -1,6 +1,6 @@
 {
   "name": "repository-playbook",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "description": "Evidence-backed repository guidance, profiles, templates and bounded local / opt-in GitHub audit checks.",

@@ -20,8 +20,8 @@ const map = files => new Map(Object.entries(files));
 const facts = (key, value, status = 'observed') => ({ repository: 'example/project', revision: null, observed_at: now.toISOString(), facts: [{ key, value, status, source: 'https://api.github.com/repos/example/project' }] });
 const run = args => spawnSync(process.execPath, [path.join(HOME, 'src/cli.mjs'), ...args], { encoding: 'utf8', timeout: 10000 });
 
-test('catalogue has 36 unique rules and four profiles', async () => {
-  const m = await loadModel(); assert.equal(m.rules.length, 36); assert.equal(m.profiles.length, 4); assert.equal(new Set(m.rules.map(r => r.id)).size, 36);
+test('catalogue has 53 unique rules and four profiles', async () => {
+  const m = await loadModel(); assert.equal(m.rules.length, 53); assert.equal(m.profiles.length, 4); assert.equal(new Set(m.rules.map(r => r.id)).size, 53);
 });
 test('empty repository: narrow failures, unknown defaults/settings, no invented score', async t => {
   const r = await audit(await fixture(t), { now });

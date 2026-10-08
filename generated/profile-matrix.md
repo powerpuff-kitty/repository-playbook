@@ -40,3 +40,20 @@ Generated from the canonical rule catalogue. Do not edit.
 | CAT-002 | not applicable | selected | not applicable | not applicable |
 | APP-001 | selected | not applicable | not applicable | not applicable |
 | APP-002 | selected | not applicable | not applicable | not applicable |
+| PRES-001 | selected | selected | selected | selected |
+| PRES-002 | selected | selected | selected | selected |
+| PRES-003 | selected | selected | selected | selected |
+| PRES-004 | selected | selected | selected | selected |
+| PRES-005 | selected | selected | not applicable | not applicable |
+| DISC-003 | selected | selected | selected | selected |
+| DISC-004 | selected | selected | selected | selected |
+| DISC-005 | selected | selected | selected | selected |
+| DISC-006 | selected | selected | selected | selected |
+| DISC-007 | selected | selected | selected | selected |
+| DISC-008 | selected | selected | selected | not applicable |
+| COMP-001 | selected | selected | selected | selected |
+| COMP-002 | selected | selected | selected | selected |
+| COMP-003 | selected | selected | selected | selected |
+| COMP-004 | selected | selected | selected | selected |
+| COMP-005 | selected | not applicable | not applicable | selected |
+| COMP-006 | selected | selected | not applicable | not applicable |

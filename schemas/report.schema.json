@@ -1,1 +1,300 @@
-{"$schema":"http://json-schema.org/draft-07/schema#","title":"Playbook report v1","type":"object","required":["schema_version","tool_version","observed_at","profile","findings","coverage","counts","exclusions","revision","files_digest"],"properties":{"schema_version":{"enum":[1]},"profile":{"enum":["documentation","catalogue","library","application"]},"revision":{"type":["string","null"]},"findings":{"type":"array","items":{"type":"object","required":["rule_id","rule_version","status","summary","evidence","priority"],"properties":{"status":{"enum":["pass","fail","unknown","manual-review","not-applicable"]},"evidence":{"type":"array","items":{"type":"object","required":["location","observation"],"properties":{"location":{"type":"string","minLength":1},"observation":{"type":"string","minLength":1}}}}}}}}}
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Playbook report v1",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "tool_version",
+    "observed_at",
+    "profile",
+    "findings",
+    "coverage",
+    "counts",
+    "exclusions",
+    "revision",
+    "files_digest",
+    "dimensions"
+  ],
+  "properties": {
+    "schema_version": {
+      "enum": [
+        1
+      ]
+    },
+    "profile": {
+      "enum": [
+        "documentation",
+        "catalogue",
+        "library",
+        "application"
+      ]
+    },
+    "revision": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "rule_id",
+          "rule_version",
+          "status",
+          "summary",
+          "evidence",
+          "priority"
+        ],
+        "properties": {
+          "status": {
+            "enum": [
+              "pass",
+              "fail",
+              "unknown",
+              "manual-review",
+              "not-applicable"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "location",
+                "observation"
+              ],
+              "properties": {
+                "location": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "observation": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "required": [
+        "presentation",
+        "visibility",
+        "completeness",
+        "engineering"
+      ],
+      "properties": {
+        "presentation": {
+          "type": "object",
+          "required": [
+            "pass",
+            "fail",
+            "not-applicable",
+            "unknown",
+            "manual-review",
+            "applicable",
+            "resolved",
+            "rules"
+          ],
+          "properties": {
+            "pass": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "fail": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "not-applicable": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "unknown": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "manual-review": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "applicable": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "resolved": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "visibility": {
+          "type": "object",
+          "required": [
+            "pass",
+            "fail",
+            "not-applicable",
+            "unknown",
+            "manual-review",
+            "applicable",
+            "resolved",
+            "rules"
+          ],
+          "properties": {
+            "pass": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "fail": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "not-applicable": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "unknown": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "manual-review": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "applicable": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "resolved": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "completeness": {
+          "type": "object",
+          "required": [
+            "pass",
+            "fail",
+            "not-applicable",
+            "unknown",
+            "manual-review",
+            "applicable",
+            "resolved",
+            "rules"
+          ],
+          "properties": {
+            "pass": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "fail": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "not-applicable": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "unknown": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "manual-review": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "applicable": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "resolved": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "engineering": {
+          "type": "object",
+          "required": [
+            "pass",
+            "fail",
+            "not-applicable",
+            "unknown",
+            "manual-review",
+            "applicable",
+            "resolved",
+            "rules"
+          ],
+          "properties": {
+            "pass": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "fail": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "not-applicable": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "unknown": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "manual-review": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "applicable": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "resolved": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "rules": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -5,7 +5,7 @@ import { audit, markdown } from './audit.mjs';
 import { collectGitHubFacts, compareGitHubFiles, repositoryName } from './github.mjs';
 import { snapshot } from './scan.mjs';
 
-const usage = `Repository Playbook 0.3.0 (local checkout; not published on npm)
+const usage = `Repository Playbook 0.4.0 (local checkout; not published on npm)
 Usage: node src/cli.mjs [directory] [options]
   --profile documentation|catalogue|library|application
   --format markdown|json       Default: markdown

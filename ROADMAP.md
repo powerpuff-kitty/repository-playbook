@@ -12,11 +12,15 @@ Add optional, bounded read-only GitHub.com collection for descriptions/topics, d
 
 Bounded static checks flag mutable Action references and explicit `write-all` token grants; a separate check compares supported dependency manifests (including nested packages) with Dependabot's configured ecosystem/directory coverage. Complex YAML and alternative update services remain review items. With `--compare-remote`, up to 10 local documentation/configuration file hashes are compared with GitHub metadata at an immutable commit. Neither local bytes nor hashes are transmitted, and the full checkout is not verified.
 
+## Implemented in 0.4.0
+
+Add presentation, visibility and scope-completeness as explicit report dimensions alongside engineering controls. New rules cover README first impression, image alternatives (excluding badges), social preview/manual visual review, About homepage, intended visibility/archival status, licence-display classification, truthful project scope, editorial placeholder hints and release/customer-journey evidence. GitHub facts collector records new metadata without additional endpoints. Unknown and manual findings remain visible, with no percentages presented as an overall quality/completion score.
+
 ## P1 — Verification and adoption
 
-Establish and verify private security and conduct reporting routes. Configure effective required checks after the `quality` job has run; inspect bypasses rather than assuming a file enables protection. Populate accurate About metadata. These settings are not changed by the auditor or this bootstrap.
+Establish and verify private security and conduct reporting routes. Configure effective required checks after the `quality` job has run; inspect bypasses rather than assuming a file enables protection. Populate accurate About metadata and review GitHub social preview. These settings are not changed by the auditor or this bootstrap.
 
-Extend live evidence to richer GitHub workflow/check metadata, private vulnerability reporting and full tracked-tree matching beyond the v0.3 selected-file sample. The current GitHub adapter covers only documented facts and intentionally leaves hidden bypasses and inaccessible settings unknown.
+Extend live evidence to richer GitHub workflow/check metadata, effective repository About/preview screenshots (only through separately authorised browser inspection), private vulnerability reporting and full tracked-tree matching beyond the v0.3 selected-file sample. The current GitHub adapter covers only documented facts and intentionally leaves hidden bypasses and inaccessible settings unknown.
 
 Replace or complement the Markdown subset with a vetted full parser and dedicated link checker. Retain advisory handling for external timeouts, redirects and private endpoints. Add more false-positive fixtures before increasing automated coverage.
 

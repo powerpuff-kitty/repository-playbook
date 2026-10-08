@@ -14,3 +14,5 @@ Publishing, paid services, new dependencies, changing repository settings, bulk 
 
 
 The v0.3 static workflow and Dependabot checks use a deliberately limited YAML/manifest reader. Unsupported syntax, partial observations, inaccessible GitHub settings and ambiguous updater configurations must never be counted as passes. SHA matching of selected files makes requests for remote paths/ref only; it does not verify the whole repository or execute Git.
+
+Version 0.4 presentation/completeness checks are intentionally conservative. A GitHub `Other` licence classifier does not mean an invalid licence; absent homepage, private visibility, archived projects, or no screenshots are not automatic failures. Social preview, actual rendered README quality and shipped-feature completeness require manual verification. Dimension counts are coverage, not a weighted score.

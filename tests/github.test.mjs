@@ -57,6 +57,8 @@ test('opt-in live facts include metadata, classic protection and exact evidence 
   assert.equal(facts.revision, 'a'.repeat(40));
   assert.deepEqual(facts.facts.map(f => [f.key, f.status, f.value]), [
     ['description_present','observed',true], ['topics_present','observed',true],
+    ['homepage_present','unknown',false], ['repository_public','unknown',false],
+    ['repository_archived','unknown',false], ['license_spdx_recognized','unknown',false],
     ['required_checks_enforced','observed',true], ['community.CONTRIBUTING.md','observed',true],
     ['community.CODE_OF_CONDUCT.md','observed',true], ['community.SECURITY.md','observed',true]
   ]);
@@ -190,4 +192,40 @@ test('CLI refuses incompatible sources and identifiers before network access', (
   assert.equal(run(['--github', 'example/project', '--repository', 'other/repo']).status, 2);
   assert.equal(run(['--github', 'https://github.com/example/project']).status, 2);
   const help = run(['--help']); assert.equal(help.status, 0); assert.match(help.stdout, /--github OWNER\/REPO/);
+});
+
+test('GitHub About metadata facts preserve missing/dual licences, visibility and archive context', async t => {
+  const mock = fakeApi({
+    [`${BASE}`]: status(200, {...META, homepage:'https://example.org/docs', private:false, archived:false, license:{spdx_id:'NOASSERTION'}, topics:['edge-ai']}),
+  });
+  const f=await collectGitHubFacts('example/project',{fetchImpl:mock.fetchImpl,now:fixedNow});
+  for (const key of ['homepage_present','repository_public','repository_archived','license_spdx_recognized']) assert.ok(f.facts.some(x=>x.key===key));
+  assert.equal(fact(f,'homepage_present').value,true);
+  assert.equal(fact(f,'repository_public').value,true);
+  assert.equal(fact(f,'repository_archived').value,false);
+  assert.equal(fact(f,'license_spdx_recognized').value,false);
+  assert.match(fact(f,'license_spdx_recognized').reason,/NOASSERTION/);
+  const root=await rootFixture(t);
+  await writeFile(path.join(root,'LICENSE'),'MIT License for code; data separate');
+  const report=await audit(root,{profile:'catalogue',facts:f,factsKind:'github-api',now:fixedNow});
+  assert.equal(report.findings.find(x=>x.rule_id==='DISC-005').status,'manual-review');
+  assert.equal(report.findings.find(x=>x.rule_id==='REL-001').status,'pass');
+});
+test('null and omitted licensing classification do not prove legal invalidity', async () => {
+  const missing=await collectGitHubFacts('example/project',{fetchImpl:fakeApi().fetchImpl});
+  assert.equal(fact(missing,'license_spdx_recognized').status,'unknown');
+  const classified=await collectGitHubFacts('example/project',{fetchImpl:fakeApi({
+    [`${BASE}`]: status(200,{...META,license:null,homepage:null,archived:true,visibility:'private'}),
+  }).fetchImpl});
+  assert.equal(fact(classified,'license_spdx_recognized').value,false);
+  assert.equal(fact(classified,'homepage_present').value,false);
+  assert.equal(fact(classified,'repository_public').value,false);
+  assert.equal(fact(classified,'repository_archived').value,true);
+});
+test('malformed licence object keeps the evidence unknown', async () => {
+  const f=await collectGitHubFacts('example/project',{fetchImpl:fakeApi({
+    [`${BASE}`]: status(200,{...META,license:{url:'something'},archived:'no'}),
+  }).fetchImpl});
+  assert.equal(fact(f,'license_spdx_recognized').status,'unknown');
+  assert.equal(fact(f,'repository_archived').status,'unknown');
 });

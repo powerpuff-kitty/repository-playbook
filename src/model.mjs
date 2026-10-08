@@ -4,7 +4,7 @@ import path from 'node:path';
 
 export const HOME = fileURLToPath(new URL('../', import.meta.url));
 export const STATES = ['pass', 'fail', 'not-applicable', 'unknown', 'manual-review'];
-export const CHECKS = ['file', 'community', 'workflow', 'readme-sections', 'local-links', 'badge-scope', 'manual', 'setting', 'workflow-security', 'dependency-coverage'];
+export const CHECKS = ['file', 'community', 'workflow', 'readme-sections', 'local-links', 'badge-scope', 'manual', 'setting', 'workflow-security', 'dependency-coverage', 'setting-advisory', 'setting-context', 'readme-first-screen', 'image-presentation', 'placeholder-review'];
 export const readJson = async file => JSON.parse(await readFile(file, 'utf8'));
 
 // Deliberately small, explicit JSON Schema subset. Unknown keywords fail closed.
@@ -49,7 +49,7 @@ export async function loadModel(root = HOME) {
     if (!CHECKS.includes(rule.check)) throw new Error(`Unknown check: ${rule.check}`);
     for (const profile of rule.profiles) if (!known.has(profile)) throw new Error(`Unknown profile: ${profile}`);
     if (['file', 'community'].includes(rule.check) && !rule.paths?.length) throw new Error(`${rule.id}: paths required`);
-    if (rule.check === 'setting' && !rule.fact) throw new Error(`${rule.id}: fact required`);
+    if (['setting', 'setting-advisory', 'setting-context'].includes(rule.check) && !rule.fact) throw new Error(`${rule.id}: fact required`);
   }
   return { rules, profiles };
 }

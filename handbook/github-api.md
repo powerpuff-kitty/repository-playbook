@@ -8,10 +8,11 @@ The `src/github.mjs` adapter makes bounded, **read-only GET** requests to GitHub
 node src/cli.mjs ../local-repo --profile library --github owner/repo
 node src/cli.mjs ../local-repo --profile library --github owner/repo --format json > ../report.json
 node src/cli.mjs ../local-repo --profile library --github owner/repo --compare-remote --format json > ../compared.json
-node src/cli.mjs ../local-repo --profile library --github owner/repo --compare-remote --format json > ../compared.json
 node src/github-cli.mjs owner/repo > ../github-facts.json
 node src/cli.mjs ../local-repo --profile library --facts ../github-facts.json
 ```
+
+The GitHub social-preview image is not reliably exposed in this API and therefore remains a manual browser setting review. Presence of a homepage, topics or SPDX identifier does not verify URL reachability, search indexing, licence validity or editorial accuracy.
 
 GitHub.com public metadata can be read unauthenticated, subject to rate limits. For private repositories, set `GITHUB_TOKEN` in the environment to an access token with the **minimum read permissions required**. In particular, some branch-protection details require administration read permission and ruleset bypass actors may not be visible even when basic rules are readable. Never commit a token or pass it through CLI arguments. This tool does not create or request elevated credentials. `--github` and `--facts` cannot be combined.
 
@@ -20,6 +21,9 @@ GitHub.com public metadata can be read unauthenticated, subject to rate limits. 
 | Fact | Read endpoints | Interpretation |
 |---|---|---|
 | `description_present`, `topics_present` | Repository metadata | Narrow, dated presence checks, not editorial quality |
+| `homepage_present` | Repository About metadata | Absence is an advisory review, never a universal failure; link accessibility is not checked |
+| `repository_public`, `repository_archived` | Repository metadata | Contextual manual review of intended visibility and lifecycle, not pass/fail settings |
+| `license_spdx_recognized` | GitHub's licence classifier in repository metadata | GitHub `Other`, `NOASSERTION` or null is an advisory, not a legal-invalidity verdict; check real licence files |
 | `required_checks_enforced` | Default branch, classic protection, active branch rules, relevant detailed rulesets | True only when an observable status-check requirement and no relevant visible bypass supports the claim; unknown if protections or bypasses cannot be established |
 | `community.CONTRIBUTING.md` | Community profile, file locations, public account `.github` fallback | Nonempty / recognised file, not completeness of contribution guidance |
 | `community.CODE_OF_CONDUCT.md` | Community profile, file locations, public account `.github` fallback | Presence, not suitability of the conduct policy |

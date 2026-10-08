@@ -814,5 +814,376 @@
       "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
     ],
     "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "PRES-001",
+    "version": 1,
+    "title": "Present a title and useful introduction above the fold",
+    "category": "presentation",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "readme-first-screen",
+    "guide": "handbook/presentation.md",
+    "review": "Check that a recognizable project heading and plain-language purpose appear before extended tables, badges, changelogs or installation details. Supports only simple Markdown heuristics.",
+    "remediation": "Place a project heading and one understandable sentence before long navigation or status content. Verify the rendered README separately.",
+    "references": [
+      "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "PRES-002",
+    "version": 1,
+    "title": "Describe nondecorative documentation images accessibly",
+    "category": "presentation",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "image-presentation",
+    "guide": "handbook/presentation.md",
+    "review": "Inspect README and docs images for explanatory alt text. Empty alt can be correct for purely decorative images; badges are excluded from the visual inventory.",
+    "remediation": "Give meaningful screenshots, diagrams and figures descriptive alt text; use empty alt only for intentional decoration.",
+    "references": [
+      "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "PRES-003",
+    "version": 1,
+    "title": "Review first-screen hierarchy and badge density",
+    "category": "presentation",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/presentation.md",
+    "review": "Inspect the rendered GitHub README in light and dark modes, on mobile and desktop. Check top links, badge claims, contrast, tables, visual density and scannability.",
+    "remediation": "Make the next action obvious, preserve evidence-backed badges, and move detail into linked sections instead of crowding the hero.",
+    "references": [
+      "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "PRES-004",
+    "version": 1,
+    "title": "Review social preview and share-card representation",
+    "category": "presentation",
+    "priority": "low",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/presentation.md",
+    "review": "GitHub repository social-preview imagery is not available from the supported read-only REST endpoints. Inspect Settings > General > Social preview only when public sharing matters.",
+    "remediation": "Use a representative, readable preview for public promotion; document unavailable settings rather than pretending a missing preview is proven.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "PRES-005",
+    "version": 1,
+    "title": "Keep product imagery representative of current behaviour",
+    "category": "presentation",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "catalogue",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/presentation.md",
+    "review": "Compare any screenshots, demo GIFs and hero illustrations with a current running example. Images may be optional for command-line or data-only projects.",
+    "remediation": "Remove stale screenshots, label prototypes, and show truthful examples rather than conceptual-only imagery presented as shipped UX.",
+    "references": [
+      "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "DISC-003",
+    "version": 1,
+    "title": "Configure a useful homepage or docs destination when relevant",
+    "category": "discoverability",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "setting-advisory",
+    "guide": "handbook/discoverability.md",
+    "review": "Inspect GitHub About homepage. Blank is not a defect when no live site or external documentation exists; URL availability and ownership need separate review.",
+    "remediation": "If a real demo or docs site exists, place its canonical URL in About and verify it independently. Never invent a homepage.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08",
+    "fact": "homepage_present"
+  },
+  {
+    "id": "DISC-004",
+    "version": 1,
+    "title": "Choose intentional public, private or internal visibility",
+    "category": "discoverability",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "setting-context",
+    "guide": "handbook/discoverability.md",
+    "review": "Assess repository visibility against its audience and disclosure policy. Public visibility is not intrinsically superior to private.",
+    "remediation": "Confirm intended access before changing repository visibility; keep confidential code and credentials private.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08",
+    "fact": "repository_public"
+  },
+  {
+    "id": "DISC-005",
+    "version": 1,
+    "title": "Investigate an unrecognized GitHub licence label",
+    "category": "discoverability",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "setting-advisory",
+    "guide": "handbook/discoverability.md",
+    "review": "GitHub can display Other/NOASSERTION for custom or split code/data licensing. Classifier recognition is separate from whether the actual licence files are correct.",
+    "remediation": "Cross-check LICENSE, data/asset licences and the README. Clarify scope; do not change legal terms just to obtain a recognized badge.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08",
+    "fact": "license_spdx_recognized"
+  },
+  {
+    "id": "DISC-006",
+    "version": 1,
+    "title": "Make archive state match the repository lifecycle",
+    "category": "discoverability",
+    "priority": "low",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "setting-context",
+    "guide": "handbook/discoverability.md",
+    "review": "Decide whether GitHub archive status matches maintenance promises. An intentionally frozen example can be complete even without recent commits.",
+    "remediation": "If archived, add support/upgrade alternatives and handover notes; if active, avoid suggesting it is permanently frozen.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08",
+    "fact": "repository_archived"
+  },
+  {
+    "id": "DISC-007",
+    "version": 1,
+    "title": "Keep About metadata, topics and README scope consistent",
+    "category": "discoverability",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/discoverability.md",
+    "review": "Compare the card title, description, language label, topics, README claims and available files. Topic presence alone does not establish relevance.",
+    "remediation": "Revise outdated descriptions and remove irrelevant topics; avoid fake keyword strategies, star requests and search-ranking promises.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "DISC-008",
+    "version": 1,
+    "title": "Review hosted documentation discovery and share metadata",
+    "category": "discoverability",
+    "priority": "low",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/discoverability.md",
+    "review": "When a public documentation site exists, inspect title, description, canonical URL, robots rules and linkability. Indexing/ranking is not measurable from a local checkout.",
+    "remediation": "Add meaningful metadata to a real site and manually verify sharing and search indexing. Mark not relevant when no public site exists.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "COMP-001",
+    "version": 1,
+    "title": "Review explicit unfinished README placeholders",
+    "category": "completeness",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "placeholder-review",
+    "guide": "handbook/completeness.md",
+    "review": "Look for narrow editorial markers such as TODO:, TBD and Lorem ipsum. The absence of markers does not prove work is finished; examples may deliberately contain them.",
+    "remediation": "Replace stale placeholder text or clearly mark it as an example or planned work. Keep roadmaps truthful.",
+    "references": [
+      "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "COMP-002",
+    "version": 1,
+    "title": "Reconcile advertised features with demonstrable behaviour",
+    "category": "completeness",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/completeness.md",
+    "review": "Compare each prominent feature claim with working source, a reproducible example, observed test or real deployed behaviour. Code presence is insufficient to verify a claim.",
+    "remediation": "Label planned, experimental and operational capabilities separately, adding reproduction steps and evidence for shipped features.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "COMP-003",
+    "version": 1,
+    "title": "Validate the complete first-user journey",
+    "category": "completeness",
+    "priority": "high",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/completeness.md",
+    "review": "Follow installation, setup, permissions, examples, expected output and troubleshooting as a new user. Never execute target code merely to generate an automatic audit.",
+    "remediation": "Exercise the documented path in an isolated environment with author approval; record actual result and version.",
+    "references": [
+      "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-readmes"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "COMP-004",
+    "version": 1,
+    "title": "Distinguish complete, experimental and planned scope",
+    "category": "completeness",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "documentation",
+      "catalogue",
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/completeness.md",
+    "review": "Find the current product status, supported targets, known limitations and open milestones. A roadmap is not evidence that its items have shipped.",
+    "remediation": "Keep a small truthful status and limitation section; give a release/milestone evidence link for important claims.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "COMP-005",
+    "version": 1,
+    "title": "Verify release, installation and support expectations",
+    "category": "completeness",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "library",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/completeness.md",
+    "review": "Compare version and changelog, package manifest, documented installation, downloadable artifacts and maintenance policy. Presence of a tag does not guarantee installation.",
+    "remediation": "Test versioned distribution and installation in CI or a documented release runbook; explain support expectations.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
+  },
+  {
+    "id": "COMP-006",
+    "version": 1,
+    "title": "Match demo and example data with actual outputs",
+    "category": "completeness",
+    "priority": "medium",
+    "basis": "editorial-policy",
+    "profiles": [
+      "catalogue",
+      "application"
+    ],
+    "check": "manual",
+    "guide": "handbook/completeness.md",
+    "review": "Confirm demo links, example output files and benchmark claims are reproducible and correctly labelled. Screenshots and generated metadata may be outdated.",
+    "remediation": "Provide a small, reproducible example and date or revision-tagged results; separate illustrative concepts from tested outputs.",
+    "references": [
+      "https://docs.github.com/en/repositories/creating-and-managing-repositories/best-practices-for-repositories"
+    ],
+    "last_reviewed": "2026-10-08"
   }
 ]

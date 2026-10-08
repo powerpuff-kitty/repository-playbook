@@ -62,7 +62,7 @@ export class GitHubReader {
     if (url.origin !== API || !url.pathname.startsWith('/repos/')) throw new Error('Disallowed GitHub API URL');
     if (++this.requests > this.maxRequests) return { ok: false, status: 0, error: 'GitHub request budget exhausted.', url: url.href };
     try {
-      const headers = { accept: 'application/vnd.github+json', 'x-github-api-version': VERSION, 'user-agent': 'repository-playbook/0.2' };
+      const headers = { accept: 'application/vnd.github+json', 'x-github-api-version': VERSION, 'user-agent': 'repository-playbook/0.4' };
       if (this.token) headers.authorization = `Bearer ${this.token}`;
       const response = await this.fetchImpl(url.href, { method: 'GET', headers, redirect: 'error', signal: AbortSignal.timeout(this.timeoutMs) });
       if (!response.ok) return { ok: false, status: response.status, rateLimited: response.headers.get('x-ratelimit-remaining') === '0', url: url.href };
@@ -213,9 +213,33 @@ export async function collectGitHubFacts(name, { fetchImpl, token = '', now = ne
   const branch = meta.data.default_branch;
   const branchInfo = await api.get(`${base}/branches/${encodeURIComponent(branch)}`);
   const revision = branchInfo.ok && /^[0-9a-f]{40}$/i.test(branchInfo.data?.commit?.sha ?? '') ? branchInfo.data.commit.sha : null;
+  const metadataSource = urlFor(base);
+  const m = meta.data;
+  const descriptionFact = typeof m.description === 'string' || m.description === null ?
+    observed('description_present', typeof m.description === 'string' && !!m.description.trim(), metadataSource) :
+    unknown('description_present', metadataSource, 'Description was omitted from repository metadata.');
+  const homepageFact = typeof m.homepage === 'string' || m.homepage === null ?
+    observed('homepage_present', typeof m.homepage === 'string' && !!m.homepage.trim(), metadataSource, 'A configured homepage is not proof the URL works or is suitable.') :
+    unknown('homepage_present', metadataSource, 'Homepage field was not provided.');
+  const visibility = typeof m.private === 'boolean' ? !m.private :
+    ['public','private','internal'].includes(m.visibility) ? m.visibility === 'public' : null;
+  const visibilityFact = typeof visibility === 'boolean' ?
+    observed('repository_public', visibility, metadataSource, `GitHub reports ${visibility ? 'public' : 'nonpublic'} visibility. This is not a recommendation to change access.`) :
+    unknown('repository_public', metadataSource, 'Repository visibility was not available.');
+  const archiveFact = typeof m.archived === 'boolean' ?
+    observed('repository_archived', m.archived, metadataSource, 'Archival state is contextual, not an intrinsic quality failure.') :
+    unknown('repository_archived', metadataSource, 'Archived state was not available.');
+  let licenseFact;
+  if (!Object.hasOwn(m, 'license')) licenseFact = unknown('license_spdx_recognized', metadataSource, 'GitHub did not return licence classification.');
+  else {
+    const spdx = typeof m.license?.spdx_id === 'string' ? m.license.spdx_id : null;
+    if (m.license !== null && spdx === null) licenseFact = unknown('license_spdx_recognized', metadataSource, 'GitHub licence object lacks a stable SPDX identifier.');
+    else licenseFact = observed('license_spdx_recognized', !!spdx && !['NOASSERTION','OTHER','NONE'].includes(spdx.toUpperCase()), metadataSource, `GitHub classifier: ${spdx ?? 'none'}. Dual/custom licensing needs human review; this is not a licence-validity verdict.`);
+  }
   const facts = [
-    observed('description_present', typeof meta.data.description === 'string' && !!meta.data.description.trim(), urlFor(base)),
-    ...(Array.isArray(meta.data.topics) ? [observed('topics_present', meta.data.topics.length > 0, urlFor(base))] : [unknown('topics_present', urlFor(base), 'GitHub response did not include a topics array.')]),
+    descriptionFact,
+    ...(Array.isArray(m.topics) ? [observed('topics_present', m.topics.length > 0, metadataSource, 'Presence does not establish topic relevance.')] : [unknown('topics_present', metadataSource, 'GitHub response did not include a topics array.')]),
+    homepageFact, visibilityFact, archiveFact, licenseFact,
     await requiredCheckFact(api, base, branch, branchInfo),
     ...await communityFacts(api, base, owner, branch),
   ];
